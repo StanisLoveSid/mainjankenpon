@@ -1,0 +1,33 @@
+<div id="post_content">
+<div class="thecard", style="width: 1000px; background-color: white">
+<%= form_for @user do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited thiscurrent_user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :points %><br>
+    <%= f.number_field :points %>
+  </div>
+  <div class="field">
+    <%= f.label :purchase %><br>
+    <%= f.text_field :purchase %>
+  </div>
+  <div class="actions">
+    <%= f.submit(class: "btn") %>
+  </div>
+<% end %>
+</div>
+</div>

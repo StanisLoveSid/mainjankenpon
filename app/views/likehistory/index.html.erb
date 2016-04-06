@@ -1,0 +1,11 @@
+<div style="padding-bottom: 24%; padding-left: 5%;">
+<h3 style="padding-left: 4%;">Favorite lessons:</h3> 
+ <%  current_user.find_up_voted_items.each do |item| %>
+  	<div class ="post_content">
+  	  <div class="card">
+		<h2 class "title" ><%= link_to item.title, item, style: "color: black;" %></h2>
+	 </div>
+	</div>  
+    <% end %>
+    
+</div>

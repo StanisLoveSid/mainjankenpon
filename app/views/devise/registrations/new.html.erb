@@ -4,18 +4,25 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
+
+<div><%= f.label :name %><br />
+  <%= f.text_field :name, autofocus: true, style: "width: 40%;" %></div>
+ Where can we find you? (Vkontakte, Facebook, Google+, etc...)
+  <div><%= f.label :location %><br />
+  <%= f.text_field :location, autofocus: true, style: "width: 40%;" %></div>
+
   <div><%= f.label(t("devise.email")) %><br />
-  <%= f.email_field :email, autofocus: true %></div>
+  <%= f.email_field :email, autofocus: true, style: "width: 40%;" %></div>
   <br>
-  <div><%= f.label(t("devise.password")) %> <% if @validatable %><i>(<%= @minimum_password_length %> characters minimum)</i><% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
+  <div><%= f.label(t("devise.password")) %> <% if @validatable %><i>(<%= @minimum_password_length  %> characters minimum)</i><% end %><br /> 
+    <%= f.password_field :password, autocomplete: "off", style: "width: 40%;" %></div>
 
   <div><%= f.label(t("devise.password_confirmation")) %><br>
-	  <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+	  <%= f.password_field :password_confirmation, autocomplete: "off", style: "width: 40%;" %></div>
   
  
   <br>
-  <div><%= f.submit(t("devise.sign_up")) %></div>
+  <div><%= f.submit(t("devise.sign_up"), class: "btn") %></div>
 <% end %>
   <br>
 <%= render "devise/shared/links" %>

@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Users2s</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Points</th>
+      <th>Purchase</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users2s.each do |users2| %>
+      <tr>
+        <td><%= users2.name %></td>
+        <td><%= users2.points %></td>
+        <td><%= users2.purchase %></td>
+        <td><%= link_to 'Show', users2 %></td>
+        <td><%= link_to 'Edit', edit_users2_path(users2) %></td>
+        <td><%= link_to 'Test', :controller => "users2s", :action => "test", :id => users2.id %></td>
+        <td><%= link_to 'Shop', :controller => "users2s", :action => "shop", :id => users2.id %></td>
+        <td><%= link_to 'Change Hero', :controller => "users2s", :action => "changehero", :id => users2.id %></td>
+        <td><%= link_to 'Hero', :controller => "users2s", :action => "hero", :id => users2.id %></td>
+        <td><%= link_to 'Destroy', users2, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %> 
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Users2', new_users2_path %>

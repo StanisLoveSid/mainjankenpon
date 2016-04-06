@@ -1,0 +1,41 @@
+<div id="page_wrapper">
+<h1> Edit lesson  </h1>
+
+   <%= form_for(@lesson, :url => {:action => 'update', :id => @lesson.id}) do |f| %>
+<div id="post_content">
+<div class="thecard", style="width: 1000px; background-color: #99d6ff">
+	
+  <p>	
+  *Title
+  <%= f.text_field :title %>
+  </p>
+  <p>*Body</p>
+  
+   <%= f.label :link %> 
+   <%= f.text_field :link, class: 'form-control', required: true %>
+          
+  <%= f.text_area :body, style: "height: 450px; background-color: white", :class => 'ckeditor'%>
+  
+       
+
+ <div class="form-group">
+        <%= f.label :image, style: "color: black;", class: 'col-sm-2 control-label'  %>
+        <div class="col-sm-6">
+            <%= f.file_field :image, class: "btn" %>
+        </div>
+    </div>
+  <div> <%= f.label :video, style: "color: black;" %> </div>
+    <%= f.file_field :video, class: "btn" %>
+
+   <p>Tags (separated by commas): </p>
+  <p>
+  <%= f.text_field :tag_list %>
+  </p>
+
+  <p>
+  <%= f.submit(t("posts.create_post"), class: "btn" ) %>
+  </p>
+</div>
+</div>
+<% end %>
+</div>

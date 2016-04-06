@@ -1,0 +1,84 @@
+
+<div id="post_content">
+<div class="thecard", style="width: 1000px; background-color: #99d6ff">
+
+<h1 class="title">
+	<%= @lesson.title %>
+</h1>
+
+<% @lesson.tags.any? %>
+    <div class="tags">
+     <% @lesson.tags.each do |tag| %>
+     
+        <%= link_to tag.name, tag_path(tag.name), class: "tag"%>
+      
+<% end %>
+</div>
+<div class="views">
+<%= "#{@lesson.impressionist_count} views" %>
+</div>
+
+<p class="date">
+<%= t "posts.submited" %> <%= time_ago_in_words(@lesson.created_at) %> <%= t "posts.ago"%> 
+  by<% if @lesson.user.name? %>
+<%= @lesson.user.name %>
+<% else %>
+ by Incognito
+ <% end %>
+<p>
+<button class="btn waves-effect waves-light" type="submit" name="action"><%= link_to "Send message to the author of lesson", new_message_path(:user => @lesson.user.id), {:style=>'color:white;'} %><i class="material-icons right">send</i></button>
+</p>
+  <% if @lesson.user == current_user %>
+ <button class="btn waves-effect waves-light" type="submit" name="action"><%= link_to(t('posts.edit'), edit_lesson_path(@lesson), {:style=>'color:white;'}) %> </button>
+ <button class="btn waves-effect waves-light" type="submit" name="action"><%= link_to(t('posts.delete'), lesson_path(@lesson),:style=>'color:white;', method: :delete, data: {confirm: 'Are you sure? Ви впевнені? あなたは深刻ですか？'}) %><i class="material-icons right">delete</i> </button>
+  </p>
+ <% end %>
+
+
+ <p class="body">
+ <%= raw @lesson.body %>
+ </p>
+<% if @lesson.link?  %>
+<iframe width="560" height="349" src="http://www.youtube.com/embed/<%=@lesson.uid %>"></iframe>
+<% else %>
+
+<% end %>
+
+ <% if @lesson.image.file? %>
+  <%=link_to image_tag(@lesson.image.url(:small)), @lesson.image.url(:original), :popup=>['original_image', 'height=700,width=900'] %>
+<% else %>
+  
+<% end %>
+
+
+<% if @lesson.video? %>
+<%= video_tag @lesson.video.url(:medium), controls: true, style: "max-width: 100%;" %>
+ <% else %>
+
+ <% end %>
+
+ <p class="btn-group pull-right">
+  <%= link_to like_lesson_path(@lesson), method: :put, class: "btn btn-default btn-sm" do %>
+    <span class="glyphicon glyphicon-chevron-up"></span>
+    Upvote
+    <%= @lesson.get_upvotes.size %>
+  <% end %>
+  <%= link_to dislike_lesson_path(@lesson), method: :put, class: "btn btn-default btn-sm" do %>
+    <span class="glyphicon glyphicon-chevron-down">
+    Downvote
+    <%= @lesson.get_downvotes.size %>
+<% end %>
+</p>
+<% if user_signed_in? %>
+ <%= link_to :controller => "users", :action => "test", :filename1 => @lesson.id.to_s+".txt", :filename2 => "answers.txt", :id => current_user.id, class: 'btn btn-default' do %> <span class="btn", style="height: 100px; padding: 2.4em;">Understand? Lets make the Test</span>  <% end %>
+
+ <% else %>
+ <% end %>
+
+</div>
+
+ </div>
+
+
+ 
+

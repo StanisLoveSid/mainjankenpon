@@ -50,7 +50,7 @@ en:
         posts:
                             edit: "Edit"
                             delete: "Delete"
-                            add_comment: "Addcomment"
+                            add_comment: "Add comment"
                             comments: "comments"
                             title: "Title" 
                             body: "Body"

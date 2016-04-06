@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title>Reading data from radio buttons</title>
+  </head>
+  <body>
+  <div style="padding-bottom: 20%;">
+    <h1>Reading data from radio buttons</h1>
+    This Ruby on Rails application reads data from radio buttons.
+    <br>
+    <br>
+    Вы ответили на <%= @summa %> вопросов, все!
+    <%= link_to :controller => "users", :action => "shop", :id => current_user.id, class: 'btn btn-default' do %> <span class="btn">Shop</span>  <% end %>
+    <%= link_to "Unpleased? Retry", :back, class: 'btn btn-default' %>  
+    <%= link_to "See the leaderboard", leaderboard_path, class: 'btn btn-default' %>    <br>
+    <br>
+    </div>
+  </body>
+</html>
+

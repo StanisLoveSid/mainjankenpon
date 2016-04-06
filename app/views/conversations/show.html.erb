@@ -1,0 +1,48 @@
+<br \><br \>
+<div id="page_wrapper">
+  <div class="well">
+    <h1>
+      <%= @conversation.subject %>
+    </h1>
+    <h2>
+      <span>A conversation with</span>
+      <% @conversation.participants.each do |participant| %>
+        <% if participant != current_user %>
+          <% if participant.name?  %>
+          <%= participant.name %>
+          <% else %>
+          Incognito
+          <% end %>
+        <% end %>
+      <% end %>
+    </h2>
+    <br/>
+    <div class="card">
+    <ul>
+      <%= content_tag_for(:li, @conversation.receipts_for(current_user)) do |receipt| %>
+        <% message = receipt.message %>
+        <br/>
+        <b>
+          <% if message.sender.name? %>
+          <%= message.sender.name %>
+          <% else %>
+            Incognito
+            <% end %>
+        </b>
+        <p>
+          <%= simple_format h message.body %>
+        </p>
+        
+        <span class="timestamp">Sent</span>
+        <span class="timestamp">
+          <%= time_ago_in_words(message.updated_at) %>
+        </span>
+        <span class="timestamp">ago.</span>
+        <br/>
+      <% end %>
+      <br/>
+    </ul>
+    </div>
+    <%= render 'messages/form', conversation: @conversation %>
+  </div>
+</div>

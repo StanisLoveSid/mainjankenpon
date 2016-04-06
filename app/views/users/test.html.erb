@@ -1,0 +1,174 @@
+<div id="post_content">
+<div class="thecard", style="width: 1000px; background-color: white">
+<style>
+.radio {
+	vertical-align: top;
+	width: 17px;
+	height: 17px;
+	margin: 0 3px 0 0;
+}
+.radio + label {
+	cursor: pointer;
+}
+.radio:not(checked) {
+	position: absolute;
+	opacity: 0;
+}
+.radio:not(checked) + label {
+	position: relative;
+	padding: 0 0 0 35px;
+}
+.radio:not(checked) + label:before {
+	content: '';
+	position: absolute;
+	top: -3px;
+	left: 0;
+	width: 22px;
+	height: 22px;
+	border: 1px solid #CDD1DA;
+	border-radius: 50%;
+	background: #FFF;
+}
+.radio:not(checked) + label:after {
+	content: '';
+	position: absolute;
+	top: 1px;
+	left: 4px;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: #0000EE;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.5);
+	opacity: 0;
+	transition: all .2s;
+}
+.radio:checked + label:after {
+	opacity: 1;
+}
+.radio:focus + label:before {
+	box-shadow: 0 0 0 3px rgba(225,255,0,.5);
+}
+
+</style>
+
+                <% arrayrad = [0,0,0,0,0,0,0,0,0,0,0,0] %>
+                <% @z = 0 %>
+                <% questions = File.readlines(params[:filename1]) %> 
+                <% answers = File.readlines(params[:filename2]) %> 
+                <% 3.times do %>
+                <% a1 = rand(3)*5 %>
+                <% a2 = rand(3)*5 %>
+                <% b = questions[a1] %>
+                <% d = answers[a1] %>
+                <% b1 = questions[a1+1]%>
+                <% d1 = answers[a1 + 1] %>
+                <% b2 = questions[a1+2]%>
+                <% d2 = answers[a1 + 2] %>
+                <% b3 = questions[a1+3]%>
+                <% d3 = answers[a1 + 3] %> 
+                <% b4 = questions[a1+4]%> 
+                <% d4 = answers[a1 + 4] %>
+                <% questions[a1] = questions[a2] %>
+                <% answers[a1] = answers[a2] %>
+                <% questions[a1+1] = questions[a2+1] %>
+                <% answers[a1+1] = answers[a2+1] %>
+                <% questions[a1+2] = questions[a2+2] %>
+                <% answers[a1+2] = answers[a2+2] %>
+                <% questions[a1+3] = questions[a2+3] %>
+                <% answers[a1+3] = answers[a2+3] %>
+                <% questions[a1+4] = questions[a2+4] %>
+                <% answers[a1+4] = answers[a2+4] %>      
+                <% questions[a2] = b %>
+                <% answers[a2] = d %>
+                <% questions[a2 + 1] = b1 %>
+                <% answers[a2+1] = d1 %>
+                <% questions[a2 + 2] = b2 %>
+                <% answers[a2+2] = d2 %>
+                <% questions[a2 + 3] = b3 %>
+                <% answers[a2+3] = d3 %>
+                <% questions[a2 + 4] = b4 %>
+                <% answers[a2+4] = d4 %> 
+ 
+                <% a1 = rand(4) %> 
+                <% a2 = rand(4) %>
+                <% b1 = questions[a1 + 1]%>
+                <% d1 = answers[a1 + 1]%>
+                <% b2 = questions[a1 + 6]%>
+                <% d2 = answers[a1 + 6]%>
+                <% b3 = questions[a1 + 11]%>
+                <% d3 = answers[a1 + 11]%>
+                <% questions[a1 + 1] = questions[a2 + 1]%>
+                <% answers[a1 + 1] = answers[a2 + 1]%>
+                <% questions[a1 + 6] = questions[a2 + 6]%>
+                <% answers[a1 + 6] = answers[a2 + 6]%>
+                <% questions[a1 + 11] = questions[a2 + 11]%>
+                <% answers[a1 + 11] = answers[a2 + 11]%>
+                <% questions[a2 + 1] = b1%>
+                <% answers[a2 + 1] = d1%>
+                <% questions[a2 + 6] = b2%>
+                <% answers[a2 + 6] = d2%>
+                <% questions[a2 + 11] = b3%>
+                <% answers[a2 + 11] = d3%>
+                
+                <% end %>
+                <% for i in 0..2 do %>
+                <% answers.delete_at(i*5 - i) %>
+                <% end %>     
+                <h3><%=questions[0]%></h3> 
+        <form action = "/users/<%=current_user.id%>/addpoints"> 
+        <input type="hidden" name="aaa" value= <%= params[:id] %> >
+		<input type="radio" class="radio" id="radio-1" name="radio" checked value = <%=answers[0]%>/>
+		<label for="radio-1" id="lbl1"><%=questions[1]%></label>
+                <br>
+                <br>
+		<input type="radio" class="radio" id="radio-2" name="radio" value = <%=answers[1]%>/>
+		<label for="radio-2" id="lbl2"><%=questions[2]%></label>
+                <br>
+                <br>
+		<input type="radio" class="radio" id="radio-3" name="radio" value = <%=answers[2]%>/>
+		<label for="radio-3" id="lbl3"><%=questions[3]%></label>
+                <br>
+                <br>
+		<input type="radio" class="radio" id="radio-4" name="radio" value = <%=answers[3]%>/>
+		<label for="radio-4" id="lbl4"><%=questions[4]%></label>
+                <br>
+                <br>
+                <h3><%=questions[5]%></h3>   
+		1<input type="radio" class="radio" id="radio-5" name="radio1" checked value=<%=answers[4]%>/>
+		<label for="radio-5" id="lbl5"><%=questions[6]%></label>
+                <br>
+                <br>
+		<input type="radio" class="radio" id="radio-6" name="radio1" value = <%=answers[5]%>/>
+		<label for="radio-6" id="lbl6"><%=questions[7]%></label>
+                <br>
+                <br>
+		<input type="radio" class="radio" id="radio-7" name="radio1" value = <%=answers[6]%>/>
+		<label for="radio-7" id="lbl7"><%=questions[8]%></label>
+                <br>
+                <br>
+		<input type="radio" class="radio" id="radio-8" name="radio1" value = <%=answers[7]%>/>
+		<label for="radio-8" id="lbl8"><%=questions[9]%></label>
+                <br>
+                <br>
+                <h3><%=questions[10]%></h3>   
+		<input type="radio" class="radio" id="radio-9" name="radio2" checked value = <%=answers[8]%>/>
+		<label for="radio-9" id="lbl9"><%=questions[11]%></label>
+                <br>
+                <br>
+		<input type="radio" class="radio" id="radio-10" name="radio2" value = <%=answers[9]%>/>
+		<label for="radio-10" id="lbl10"><%=questions[12]%></label>
+                <br>
+                <br>
+		<input type="radio" class="radio" id="radio-11" name="radio2" value = <%=answers[10]%>/>
+		<label for="radio-11" id="lbl11"><%=questions[13]%></label>
+                <br>
+                <br>
+		<input type="radio" class="radio" id="radio-12" name="radio2" value = <%=answers[11]%>/>
+		<label for="radio-12" id="lbl12"><%=questions[14]%></label>
+        <br>
+        <br>
+        <input type="submit" id="submit" name = "AAA" value = "Сохранить результат"/ class="btn">
+    </form>
+
+            </div>
+            </div>

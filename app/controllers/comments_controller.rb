@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
     end
   else
     respond_to do |format|
-   format.html {redirect_to posts_url, notice: 'You have to sign in or sign up to leave a comments'}
+   format.html {redirect_to posts_url, notice: 'You have to sign in or sign up to leave comments'}
    end
   end
 
@@ -36,8 +36,27 @@ class CommentsController < ApplicationController
       format.html { redirect_to posts_url, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
-
   end
+
+ def index
+  @comments = Comment.find_with_reputation(:votes, :all, order: "votes desc")
+ end
+
+def vote
+  if @user = current_user
+  value = params[:type] == "up" ? 1 : -1
+  @comment = Comment.find(params[:id])
+  @comment.add_or_update_evaluation(:votes, value, current_user)
+  redirect_to :back, notice: "Thank you for voting"
+
+else
+  respond_to do |format|
+   format.html {redirect_to posts_url, notice: 'You have to sign in or sign up to leave your votes'}
+   end
+  end
+end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

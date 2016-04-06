@@ -24,6 +24,18 @@ module Bloglab
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
     config.assets.initialize_on_precompile = false
+    
+    ActionMailer::Base.smtp_settings = {
+
+  :address        => 'smtp.gmail.com',
+  :domain         => 'mail.google.com',
+  :port           => 587,
+  :user_name      => 'forumjankenpon@gmail.com',
+  :password       => '301095st',
+  :authentication => :plain,
+  :enable_starttls_auto => true
+    }
+
   end
 
 end

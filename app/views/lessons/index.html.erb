@@ -1,0 +1,97 @@
+<div class="leaderboardposition">
+ <div class="card" style="width: 20%; padding: 1em;">                            
+<h6><%= link_to "Leaderboard", leaderboard_path %></h6>
+<h6>日本語の忍者:</h6>
+<% @users.sort_by{|user| -user.points.to_i }[0...5].each_with_index do |user, index|%>
+
+<li style="list-style-type: none; "> <% if user.name? %>
+   <%= image_tag(user.avatar.url(:small), class: "leaderboardcircular") %>
+  <% if user == @users.first %>
+  日本語の将軍<%= link_to user.name, user, style: "color: crimson;" %>
+  <% else %>
+  <%= link_to user.name, user , style: "color: crimson;"%>
+  <% end %>
+      <% else %>
+         Incognito
+         <% end %>
+<%= user.points %> </li>
+<% end %>
+</div>
+</div>
+
+
+
+
+<% @lessons.each do |lesson| %>
+
+
+	
+     <div id="post_content">
+     <div class="card">
+     <ul id="menu">
+    <li class="author">Submitted <%= time_ago_in_words(lesson.created_at) %> 
+     <% if lesson.user.name? %>
+     by <%=  lesson.user.name%> 
+     <% else %>
+     by Incognito 
+     <% end %>
+    </li>﻿
+
+  <li class="center"><% if lesson.user.name? %>
+     <i> <%=  lesson.user.name%></i> 
+     <% else %>
+     <i> Incognito </i> 
+     <% end %><%= image_tag(lesson.user.avatar.url(:small), class: "circular") %></li>
+  </ul>
+		<h4 class "title" ><%= link_to lesson.title, lesson, {style: "color: black; position: relative"} %></h4>
+     <i class="small material-icons">loyalty</i>
+ 
+		<% lesson.tags.any? %>
+    <div class="tags">
+     <% lesson.tags.each do |tag| %>
+     
+        <%= link_to tag.name, tag_path(tag.name), class: "tag"%>
+      
+<% end %>
+</div>
+	 <div style="padding-top: 2%;">
+
+       <%= link_to like_lesson_path(lesson), method: :put, remote: true, data: { type: :json }, class: 'btn' do %> 
+     Like
+     <i class="small material-icons">thumb_up</i><%= lesson.get_upvotes.size %>
+ <% end %>
+        
+      
+      <%= link_to dislike_lesson_path(lesson), method: :put, remote: true, data: { type: :json }, class: 'btn' do %> 
+     Dislike
+     <i class="small material-icons">thumb_down</i><%= lesson.get_downvotes.size %>
+ <% end %>
+
+
+
+        <script>
+
+   $('.btn')
+  .on('ajax:send', function () { $(this).addClass('loading'); })
+  .on('ajax:complete', function () { $(this).removeClass('loading'); })
+  
+  .on('ajax:success', function(e, data, status, xhr) { $(this).html(data.count); });
+  
+    </script>
+
+    </div>
+
+     <ul id="menu">
+
+ <li class="small material-icons", style="padding-left: 4%">insert_chart</li>
+<%= "#{lesson.impressionist_count} views" %>
+
+</ul>
+  <div calss="saveme">
+  </div>
+  </div>
+ 
+ </div>
+<% end %>
+
+<%= will_paginate @lessons %>

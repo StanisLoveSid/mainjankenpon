@@ -1,0 +1,12 @@
+<%= current_user.points %>
+
+  <div style="padding-bottom: 30%;">
+<%= link_to "Стоимость 1", :controller => "users", :action => "buy", :id => params[:id], :a => 1, :b => 1 %> 
+<%= link_to "Стоимость 5", :controller => "users", :action => "buy", :id => params[:id], :a => 5, :b => 2 %> 
+<%= link_to "Стоимость 10", :controller => "users", :action => "buy", :id => params[:id], :a => 10, :b => 4 %> 
+<%= link_to "Стоимость 20", :controller => "users", :action => "buy", :id => params[:id], :a => 20, :b => 8 %> 
+<%= link_to "Стоимость 30", :controller => "users", :action => "buy", :id => params[:id], :a => 30, :b => 5 %> 
+<%= link_to "Стоимость 40", :controller => "users", :action => "buy", :id => params[:id], :a => 40, :b => 6 %> 
+<%= link_to "Main", :controller => "users", :action => "index"%>
+
+</div>

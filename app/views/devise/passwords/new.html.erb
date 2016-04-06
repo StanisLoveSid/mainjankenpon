@@ -5,9 +5,9 @@
   <%= devise_error_messages! %>
   <br>
   <div><%= f.label(t("devise.email")) %><br />
-  <%= f.email_field :email, autofocus: true %></div>
+  <%= f.email_field :email, autofocus: true, style: "width: 40%;"%></div>
   <br>
-  <div><%= f.submit(t("devise.send_me_reset_password_instructions")) %></div>
+  <div><%= f.submit(t("devise.send_me_reset_password_instructions"), class: "btn") %></div>
   <br>
 <% end %>
 <br>
