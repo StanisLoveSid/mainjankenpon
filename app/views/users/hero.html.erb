@@ -1,21 +1,6 @@
 <div id="post_content">
 <div class="thecard">
-<%= link_to "Main", :controller => "users", :action => "index"%>
-<img src = "222.jpg" alt="Покупка1" id="p1"/>
-<img src = "222.jpg" alt="Покупка2" id="p2"/>
-<img src = "222.jpg" alt="Покупка3" id="p3"/>
-<img src = "222.jpg" alt="Покупка4" id="p4"/>
-<img src = "222.jpg" alt="Покупка5" id="p5"/>
-<img src = "222.jpg" alt="Покупка6" id="p6"/>
-<% array = ["222.jpg"] %>
-<% imgarr = ["0000.jpg","0001.jpg","0010.jpg","0011.jpg","0100.jpg","0101.jpg","0110.jpg","0111.jpg","1000.jpg","1001.jpg","1010.jpg","1011.jpg","1100.jpg","1101.jpg","1110.jpg","1111.jpg"] %>
-
-<% imgarr2 = ["dog.jpg", "cat.jpg", "popugai.jpg"] %>
-
-<%= image_tag imgarr[@user.purchase.to_i] %>
-<%= image_tag imgarr2[@user.herotype.to_i - 1] %>
-<%= @user.name %>
-<%= @user.purchase %>
+<%= image_tag current_user.herotype.to_s+current_user.purchase.to_s+".jpg" %>
 <%= link_to "Back to lessons!", lessons_path, class: 'btn btn-default' %>
 </div>
 </div>

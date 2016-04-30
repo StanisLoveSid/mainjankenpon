@@ -1,1 +1,5 @@
-<%= link_to "Main", :controller => "users", :action => "index"%>
+<div class ="notify" style="padding-bottom: 24%; padding-left: 20%;">
+  <p> <%= @message %> </p> 
+  <p> <%= link_to 'See your hero', :controller => "users", :action => "hero", :id => current_user.id %> or <%=  link_to "return to lessons", root_path %> </p> 
+  <%= image_tag("nekohide.png") %>
+</div>

@@ -75,7 +75,6 @@ end
   get '/users/:id/shop' => 'users#shop'
   get '/users/:id/buy' => 'users#buy'
   get '/users/:id/saveresult' => 'users#saveresult'
-  get '/users/:id/test' => 'users#test'
   get '/users/:id/shop' => 'users#shop'
   get '/users/:id/buy' => 'users#buy'
   get '/users/:id/hero' => 'users#hero'
@@ -83,7 +82,7 @@ end
   get '/users/:id/saveresult' => 'users#saveresult'
   get '/users/:id/addpoints' => 'users#addpoints'
   get '/leaderboard', to: 'leaderboard#index'
-
+  get '/tests', to: 'tests#index'
 
   
 end
