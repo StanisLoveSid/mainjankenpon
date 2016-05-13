@@ -13,10 +13,66 @@
 //= require jquery
 //= require materialize-sprockets
 //= require materialize/extras/nouislider
+//= require zclip
 //= require jquery_ujs
 //= require ckeditor-jquery
 //= require turbolinks
 //= require_tree .
+
+
+
+
+$(document).ready(function() {
+     $("#lead_form").hide();
+       $("#lead_form1").hide();
+         $("#lead_form2").hide();
+           $("#lead_form3").hide();
+            $("#lead_form4").hide();
+             $("#lead_form5").hide();
+              $("#lead_form6").hide();
+    setTimeout(function() {
+        
+        $("#lead_form").fadeIn(1500);
+
+    },3000);
+
+        setTimeout(function() {
+        
+        $("#lead_form1").fadeIn(1500);
+
+    },8000);
+
+           setTimeout(function() {
+        
+        $("#lead_form2").fadeIn(1500);
+
+    },11000);
+
+             setTimeout(function() {
+        
+        $("#lead_form3").fadeIn(1500);
+
+    },14000);
+
+                          setTimeout(function() {
+        
+        $("#lead_form4").fadeIn(1500);
+
+    },18000);
+
+                            setTimeout(function() {
+        
+        $("#lead_form5").fadeIn(1500);
+
+    },23000);
+
+                              setTimeout(function() {
+        
+        $("#lead_form6").fadeIn(1500);
+
+    },30000);                     
+
+});
 
 $('.ckeditor').ckeditor({
   // optional config

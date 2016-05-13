@@ -6,6 +6,12 @@
 
  <div class="form-group">
  <h4>Your points:  <%= current_user.points %></h4>
+
+ <% if current_user.rating? %>
+    <h4>Your rating <%= current_user.rating %> </h4>
+    <% else %>
+    
+    <% end %>
  <p> <%= image_tag(current_user.avatar.url(:small), class: "circular") %></p>
         <%= f.label :avatar, class: 'col-sm-2 control-label'  %> 
         <div class="col-sm-6">

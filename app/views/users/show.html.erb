@@ -36,6 +36,20 @@
 <%= @user.name %>
 <%= @user.purchase %>
 
+<button class="btn" id="copy-some-txt" onclick="document.getElementById('copy-some-txt').innerHTML = 'Copied! Now you can share'">Click to copy the link</button>
+<script>
+	$('#copy-some-txt').zclip({
+    copy: "<%= request.original_url %>"
+
+});
+</script>
+
+<script>
+function myFunction() {
+    document.getElementById("copy-some-txt").style.color = "red";
+}
+</script>
+
 <p>
 <button class="btn waves-effect waves-light" type="submit" name="action"><%= link_to "Send message this user", new_message_path(:user => @user.id), {:style=>'color:white;'} %><i class="material-icons right">send</i></button>
 </p>

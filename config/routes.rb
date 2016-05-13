@@ -13,6 +13,8 @@ devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks'
 
 get 'tags/:tag', to: 'lessons#index', as: :tag
  
+  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
+
  get "/messages" => redirect("/conversations")
   resources :messages do
   member do
@@ -57,6 +59,7 @@ end
     end
   end
   end
+
   resources :my_models
   
  
@@ -78,11 +81,10 @@ end
   get '/users/:id/shop' => 'users#shop'
   get '/users/:id/buy' => 'users#buy'
   get '/users/:id/hero' => 'users#hero'
-  get '/users/:id/changehero' => 'users#changehero'
   get '/users/:id/saveresult' => 'users#saveresult'
-  get '/users/:id/addpoints' => 'users#addpoints'
   get '/leaderboard', to: 'leaderboard#index'
   get '/tests', to: 'tests#index'
-
-  
+  end
+  get '/users/:id/addpoints' => 'users#addpoints'
+  get '/users/:id/changehero' => 'users#changehero'
 end

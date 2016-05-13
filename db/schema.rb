@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418124722) do
+ActiveRecord::Schema.define(version: 20160509153541) do
 
   create_table "authentication_providers", force: :cascade do |t|
     t.string   "name"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 20160418124722) do
     t.string   "link"
     t.string   "uid"
     t.integer  "lesson_id"
+    t.string   "leksika"
   end
 
   add_index "lessons", ["uid"], name: "index_lessons_on_uid", unique: true
@@ -316,6 +317,7 @@ ActiveRecord::Schema.define(version: 20160418124722) do
     t.string   "role"
     t.string   "location"
     t.string   "tests"
+    t.string   "rating"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

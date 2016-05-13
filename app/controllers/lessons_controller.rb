@@ -65,7 +65,7 @@ class LessonsController < ApplicationController
 
 	def update
 		@lesson = Lesson.find(params[:id])
-		if @lesson.update(params[:lesson].permit(:title, :body, :link, :image, :video, :tag_list))
+		if @lesson.update(params[:lesson].permit(:title, :body, :link, :image, :video, :tag_list, :leksika))
 		   redirect_to @lesson
 		else
 			render 'edit'
@@ -120,7 +120,7 @@ class LessonsController < ApplicationController
 
 	private
 	def lesson_params
-		params.require(:lesson).permit(:title, :body, :id, :link, :image, :video, :tag_list)
+		params.require(:lesson).permit(:title, :body, :id, :link, :image, :video, :tag_list, :leksika)
 	end
 
 	

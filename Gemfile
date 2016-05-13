@@ -35,6 +35,9 @@ gem 'will_paginate-materialize'
 gem 'actionpack-page_caching'
 gem 'youtube_addy'
 gem 'ckeditor_rails'
+gem "recaptcha", require: "recaptcha/rails"
+gem 'jquery-turbolinks'
+gem 'zclip-rails'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

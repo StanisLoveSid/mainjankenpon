@@ -17,6 +17,10 @@
   <div><%= f.label(t("devise.password")) %> <% if @validatable %><i>(<%= @minimum_password_length  %> characters minimum)</i><% end %><br /> 
     <%= f.password_field :password, autocomplete: "off", style: "width: 40%;" %></div>
 
+  <div>
+    <%= recaptcha_tags %>
+  </div>
+
   <div><%= f.label(t("devise.password_confirmation")) %><br>
 	  <%= f.password_field :password_confirmation, autocomplete: "off", style: "width: 40%;" %></div>
   

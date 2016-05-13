@@ -38,6 +38,11 @@
  <p class="body">
  <%= raw @lesson.body %>
  </p>
+   <p>
+   Leksika:
+    <%= @lesson.leksika %>
+  </p>
+  <%= image_tag current_user.herotype.to_s+current_user.purchase.to_s+".jpg" %>
 <% if @lesson.link?  %>
 <iframe width="560" height="349" src="http://www.youtube.com/embed/<%=@lesson.uid %>"></iframe>
 <% else %>
@@ -58,19 +63,22 @@
  <% end %>
 
  <p class="btn-group pull-right">
-  <%= link_to like_lesson_path(@lesson), method: :put, class: "btn btn-default btn-sm" do %>
-    <span class="glyphicon glyphicon-chevron-up"></span>
-    Upvote
-    <%= @lesson.get_upvotes.size %>
-  <% end %>
-  <%= link_to dislike_lesson_path(@lesson), method: :put, class: "btn btn-default btn-sm" do %>
-    <span class="glyphicon glyphicon-chevron-down">
-    Downvote
-    <%= @lesson.get_downvotes.size %>
-<% end %>
+
+
+       <%= link_to like_lesson_path(@lesson), method: :put, remote: true, data: { type: :json }, class: 'btn' do %> 
+     Like
+     <i class="small material-icons">thumb_up</i><%= @lesson.get_upvotes.size %>
+ <% end %>
+        
+      
+      <%= link_to dislike_lesson_path(@lesson), method: :put, remote: true, data: { type: :json }, class: 'btn' do %> 
+     Dislike
+     <i class="small material-icons">thumb_down</i><%= @lesson.get_downvotes.size %>
+ <% end %>
 </p>
+
 <% if user_signed_in? %>
- <%= link_to :controller => "users", :action => "test", :filename1 => @lesson.id.to_s+".txt", :filename2 => "answers.txt", :id => current_user.id, class: 'btn btn-default' do %> <span class="btn", style="height: 100px; padding: 2.4em;">Understand? Lets make the Test</span>  <% end %>
+ <%= link_to "Understand? Lets make the Test", tests_path, class: 'btn btn-default', style: "height: 100px; padding: 2.4em;" %> 
 
  <% else %>
  <% end %>

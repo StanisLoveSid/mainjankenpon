@@ -1,19 +1,46 @@
-<html>
-  <head>
     <title>Reading data from radio buttons</title>
-  </head>
+
   <body>
-  <div style="padding-bottom: 20%;">
     <h1>Reading data from radio buttons</h1>
     This Ruby on Rails application reads data from radio buttons.
     <br>
     <br>
     Вы ответили на <%= @summa %> вопросов, все!
-    <%= link_to :controller => "users", :action => "shop", :id => current_user.id, class: 'btn btn-default' do %> <span class="btn">Shop</span>  <% end %>
-    <%= link_to "Unpleased? Retry", :back, class: 'btn btn-default' %>  
-    <%= link_to "See the leaderboard", leaderboard_path, class: 'btn btn-default' %>    <br>
     <br>
-    </div>
-  </body>
-</html>
+    <br>
+    <% hash = { 0 => "Неправильно", 1 => "Правильно" } %>
+    <% array1 = File.readlines("tmp.txt") %>
+    <% array2 = File.readlines("tmp2.txt") %>
+    <% array3 = [@data1_2, @data2_2, @data3_2]%> 
+    <% array4 = [@data1, @data2, @data3]%>
+    
+    Результаты:
+    <br>
+    <% for i in 0..29 %>
+    Вопрос №1: <%= array1[5*i] %>
+    <br>Ваш ответ:
+       <%= array1[@data2[i]] %> - <%= hash[@data[i]] %>
+    <br>
+    <% end %>
+    <br>
+    <br>
+    <br>
+
+
+
+    <% for i in 0..29 do %>
+    <%= array1[5*i] %>
+    <br>
+    <% for j in 0..3 do %>
+       <%= array1[5*i + j + 1] %>
+       <% if (array3[i] == 4*i + j + 1) %>
+       <%= hash[array4[i]] %>
+       <% end %>
+       <br> 
+    <% end %>
+    <br> 
+    <% end %>
+
+
+
 

@@ -1,9 +1,24 @@
+<div id="post_content">
+     <div class="card">
+<div id="points">
 <%= current_user.points %>
-
+</div>
   <div style="padding-bottom: 30%;">
+    <ul id="menu">
+<li id="togo" class="togo"> </li>
+<li id="msg"></li>
+<li id="improve">
+<%= link_to "Улучшить("+@list[current_user.purchase.to_i].to_s+"поинтов)", :controller => "users", :action => "buy", :id => params[:id], :a => @list[current_user.purchase.to_i], :format => "js", remote: true %> 
+</li>
+</ul>
+   <div id="current_character">
+   	<%= image_tag(current_user.herotype.to_s+current_user.purchase.to_s+".jpg", size: "260x180") %>
+   </div>
 
-<% list = [1, 5, 10, 20, 50, 100] %>
-<%= link_to "Улучшить("+list[params[:purchase].to_i].to_s+"поинтов)", :controller => "users", :action => "buy", :id => params[:id], :a => list[params[:purchase].to_i]%> 
+  <div id="character">
+  </div>
 
 
+</div>
+</div>
 </div>

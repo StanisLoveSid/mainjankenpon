@@ -18,6 +18,7 @@
 <script src="https://www.google.com/jsapi"></script>
   <script src="https://www.youtube.com/iframe_api"></script>
 </head>
+<main>
 <body>
 
        
@@ -30,18 +31,32 @@
       <% if current_user && current_user.admin? %>
       <li><%= link_to('New lesson', new_lesson_path) %></li>
       <% end %>
+           <li>
+        <ul id="drop-nav" class="cell" >
+ 
+  <li><a href="#">Personal</a>
+    <ul>
+        <li><%= link_to 'Account', edit_user_registration_path %></li>
+        <li><%= link_to 'My messages', conversations_path %></li>
+      <li><%= link_to 'Favorites', likehistory_path %></li>
+    </ul>
+  </li>
+</ul>
+</li>
       <li> <%= link_to 'Shop', :controller => "users", :action => "shop", :id => current_user.id, :purchase=> current_user.purchase %> </li>
       <li><%= link_to(t("layouts.log_out"), destroy_user_session_path, method: :delete) %></li>
-      <li><%= link_to 'Account', edit_user_registration_path %></li>
      <li><%= link_to 'Hero', :controller => "users", :action => "hero", :id => current_user.id %></li>
-        <li><%= link_to 'My messages', conversations_path %></li>
+     <li><%= link_to 'tests', tests_path %></li>
         <li><%= link_to 'Our users', users_path %></li>
         <li><%= link_to 'Tags', tagpages_path %></li>
-        <li><%= link_to 'Favorites', likehistory_path %></li>
+        
       </ul>
+
     </div>
   </nav>
  </div>
+
+
       <div id="wrapper" class="toggled" >
 
        
@@ -103,7 +118,7 @@
         $("#wrapper").toggleClass("toggled");
     });
     </script>
-
+ <%= render 'layouts/flash_messages' %>
  <% else %>
 <div class="navbar-fixed">
  <nav>
@@ -204,13 +219,11 @@
 	 
 	 </div>
  
-	 <% flash.each do |name, msg|%>
-		 <%= content_tag(:div, msg, class: "alert") %>
-	 <% end %> 
+ 
  <%= yield %>
 
 
- 
+ </main>
 
  <footer class="page-footer">
           <div class="container">

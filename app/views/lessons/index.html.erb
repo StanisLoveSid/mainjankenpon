@@ -1,3 +1,4 @@
+<% if user_signed_in? %>
 <div class="leaderboardposition">
  <div class="card" style="width: 20%; padding: 1em;">                            
 <h6><%= link_to "Leaderboard", leaderboard_path %></h6>
@@ -18,6 +19,7 @@
 <% end %>
 </div>
 </div>
+
 
 
 
@@ -66,8 +68,10 @@
      Dislike
      <i class="small material-icons">thumb_down</i><%= lesson.get_downvotes.size %>
  <% end %>
-
-
+<div class="socials"></div>
+<script>
+  $('.socials').socialShareButtons()
+</script>
 
         <script>
 
@@ -95,3 +99,129 @@
 <% end %>
 
 <%= will_paginate @lessons %>
+
+<% else %>
+ <div style="padding-bottom: 40%;">
+
+ <div id="lead_form0" style="width: 83%; padding-left: 10%;">  
+
+<div class="card" style="width: 70%;" >
+<ul id="menu">
+  <li> <h5>Добро пожаловать на сайт JanKenPon </h5> </li>
+  <li class="togo1"> <%= image_tag("togotogo.png", size: "160x100") %></li>
+ </ul>
+</div>
+
+</div>
+
+<div id="lead_form">  
+<div id="post_content">
+<div class="card">
+<h5>1) Регистрируйтесь:</h5>
+ <ul>
+  <li style="padding: 1em; padding-left: 19%;"><%= link_to "Sign up with Facebook", user_omniauth_authorize_path(:facebook), class: "btn waves-effect waves-light" %></li>
+  <li style="padding: 1em; padding-left: 18%;"><%= link_to "Sign up with Vkontakte", user_omniauth_authorize_path(:vkontakte), class: "btn waves-effect waves-light" %></li>
+    <li style="padding: 1em; padding-left: 28%;"><%= link_to(t('layouts.registration'), new_user_registration_path, class: "btn") %></li>
+  </ul>
+</div>
+</div>
+</div>
+
+<div id="lead_form1" class="kani" style="width: 44%">  
+<div class="card" style="width: 80%">
+<h5>2) Выбирайте персонажей:</h5>
+<li style="padding-left: 20%;"> <%= image_tag("kani-ki-kun2.jpg", size: "200x550") %> </li>
+</div>
+</div>
+
+<div id="lead_form2">  
+<div id="post_content">
+<div class="card">
+<h5>3) Изучайте уроки...</h5>
+<ul>
+<li style="padding: 1em;"> <span class="btn", style="height: 100px; padding: 2.4em;">Урок №1. Как приручить дракона</span> </li> 
+ <h5>...и оценивайте их на форуме:</h5>
+
+<li style="padding: 1em;"> <%= link_to "Have any questions? Ask it on our forum", "http://blog.jankenpon.info/en" , class: 'btn btn-default', style: "height: 100px; padding: 2.4em;"%> </li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="lead_form3">  
+<div id="post_content">
+<div class="card">
+<h5>4) Проходите тесты и получайте за них баллы:</h5>
+ Что делал вчера?
+                <br>
+                <br>
+    <input type="radio" class="radio" id="radio-1" name="radio" checked value = <%= %>/>
+    <label for="radio-1" id="lbl1">Нужно посмотреть в завтрашний день</label> 
+                <br>
+                <br>
+    <input type="radio" class="radio" id="radio-2" name="radio" value = <%= %>/>
+    <label for="radio-2" id="lbl2">Ничего</label>
+                <br>
+                <br>
+
+</div>
+</div>
+</div>
+
+<div id="lead_form4" class="kani3" style="width: 44%">  
+<div id="post_content">
+<div class="card" style="width: 80%">
+<h5>5) Наберите как можно больше баллов и попадите в таблицу лидеров: </h5>
+ <div class="card" style="width: 85%; padding: 1em;">                            
+<h6><%= link_to "Leaderboard", leaderboard_path %></h6>
+<h6>日本語の忍者:</h6>
+<% @users.sort_by{|user| -user.points.to_i }[0...5].each_with_index do |user, index|%>
+
+<li style="list-style-type: none; "> <% if user.name? %>
+   <%= image_tag(user.avatar.url(:small), class: "leaderboardcircular") %>
+  <% if user == @users.first %>
+  日本語の将軍<%= link_to user.name, user, style: "color: crimson;" %>
+  <% else %>
+  <%= link_to user.name, user , style: "color: crimson;"%>
+  <% end %>
+      <% else %>
+         Incognito
+         <% end %>
+<%= user.points %> </li>
+<% end %>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="lead_form5" class="kani2">  
+<div id="post_content">
+<div class="card" style="width: 90%;">
+<h5>6) С помощью баллов можно улучшать персонажей: </h5>
+<ul id="menu">
+<li style="padding-left: 2%;"> <%= image_tag("kani1.jpg", size: "200x550") %> </li>
+<li style="padding-left: 2%;"><i class="large material-icons">fast_forward</i></li>
+<li style="padding-left: 10%;"> <%= image_tag("kani2.jpg", size: "200x550") %> </li>
+<li style="padding-left: 2%;"><i class="large material-icons">fast_forward</i></li>
+<li style="padding-left: 10%;"> <%= image_tag("kani3.jpg", size: "200x550") %> </li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="lead_form6">  
+<div id="post_content" style="padding-left: 25%;">
+<div class="card">
+<h5>7) Займите звание сегуна. Делитесь Вашими достижениями в социальных сетях. Начать: </h5>
+ <ul>
+  <li style="padding: 1em; padding-left: 19%;"><%= link_to "Sign up with Facebook", user_omniauth_authorize_path(:facebook), class: "btn waves-effect waves-light" %></li>
+  <li style="padding: 1em; padding-left: 18%;"><%= link_to "Sign up with Vkontakte", user_omniauth_authorize_path(:vkontakte), class: "btn waves-effect waves-light" %></li>
+    <li style="padding: 1em; padding-left: 28%;"><%= link_to(t('layouts.registration'), new_user_registration_path, class: "btn") %></li>
+  </ul>
+</div>
+</div>
+</div>
+
+</div>
+<% end %>
