@@ -159,6 +159,15 @@ background: #1a1a1a;
     
 }
 
+.wrogcenter {
+    position: absolute;
+    left: 37%;
+    top: 65%;
+    width: 100%;
+    }
+
+
+
 .kani {
 
 	    position: absolute;
@@ -228,6 +237,18 @@ background: #1a1a1a;
 .circular {
 	width: 70px;
 	height: 70px;
+	border-radius: 150px;
+	-webkit-border-radius: 150px;
+	-moz-border-radius: 150px;
+	background: url(http://link-to-your/image.jpg) no-repeat;
+	box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+	-webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+	-moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+	}
+
+.teamcircular {
+	width: 300px;
+	height: 300px;
 	border-radius: 150px;
 	-webkit-border-radius: 150px;
 	-moz-border-radius: 150px;

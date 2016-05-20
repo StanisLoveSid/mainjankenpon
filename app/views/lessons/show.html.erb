@@ -15,18 +15,17 @@
 <% end %>
 </div>
 <div class="views">
-<%= "#{@lesson.impressionist_count} views" %>
+<%= "#{@lesson.impressionist_count}" %> <%= t "lessons.views" %>
 </div>
 
 <p class="date">
-<%= t "posts.submited" %> <%= time_ago_in_words(@lesson.created_at) %> <%= t "posts.ago"%> 
-  by<% if @lesson.user.name? %>
-<%= @lesson.user.name %>
-<% else %>
- by Incognito
- <% end %>
+   <% if @lesson.user.name? %>  
+     <%=  @lesson.user.name%> <%= t "lessons.who" %> <%= time_ago_in_words(@lesson.created_at) %> <%= t "lessons.when" %>
+     <% else %>
+     Incognito <%= t "lessons.who" %> <%= time_ago_in_words(@lesson.created_at) %> <%= t "lessons.when" %>
+     <% end %>
 <p>
-<button class="btn waves-effect waves-light" type="submit" name="action"><%= link_to "Send message to the author of lesson", new_message_path(:user => @lesson.user.id), {:style=>'color:white;'} %><i class="material-icons right">send</i></button>
+<button class="btn waves-effect waves-light" type="submit" name="action"><%= link_to(t("lessons.send"), new_message_path(:user => @lesson.user.id), {:style=>'color:white;'}) %><i class="material-icons right">send</i></button>
 </p>
   <% if @lesson.user == current_user %>
  <button class="btn waves-effect waves-light" type="submit" name="action"><%= link_to(t('posts.edit'), edit_lesson_path(@lesson), {:style=>'color:white;'}) %> </button>
@@ -66,19 +65,19 @@
 
 
        <%= link_to like_lesson_path(@lesson), method: :put, remote: true, data: { type: :json }, class: 'btn' do %> 
-     Like
+     <%= t "lessons.like" %>
      <i class="small material-icons">thumb_up</i><%= @lesson.get_upvotes.size %>
  <% end %>
         
       
       <%= link_to dislike_lesson_path(@lesson), method: :put, remote: true, data: { type: :json }, class: 'btn' do %> 
-     Dislike
+     <%= t "lessons.dislike" %>
      <i class="small material-icons">thumb_down</i><%= @lesson.get_downvotes.size %>
  <% end %>
 </p>
 
 <% if user_signed_in? %>
- <%= link_to "Understand? Lets make the Test", tests_path, class: 'btn btn-default', style: "height: 100px; padding: 2.4em;" %> 
+ <%= link_to(t("lessons.test"), tests_path, class: 'btn btn-default', style: "height: 100px; padding: 2.4em;") %> 
 
  <% else %>
  <% end %>

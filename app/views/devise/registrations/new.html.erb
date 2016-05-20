@@ -7,14 +7,14 @@
 
 <div><%= f.label :name %><br />
   <%= f.text_field :name, autofocus: true, style: "width: 40%;" %></div>
- Where can we find you? (Vkontakte, Facebook, Google+, etc...)
+ <%= t "devise.profile" %>
   <div><%= f.label :location %><br />
   <%= f.text_field :location, autofocus: true, style: "width: 40%;" %></div>
 
   <div><%= f.label(t("devise.email")) %><br />
   <%= f.email_field :email, autofocus: true, style: "width: 40%;" %></div>
   <br>
-  <div><%= f.label(t("devise.password")) %> <% if @validatable %><i>(<%= @minimum_password_length  %> characters minimum)</i><% end %><br /> 
+  <div><%= f.label(t("devise.password")) %><br /> 
     <%= f.password_field :password, autocomplete: "off", style: "width: 40%;" %></div>
 
   <div>

@@ -5,10 +5,15 @@
                 <% arrayrad = [0,0,0,0,0,0,0,0,0,0,0,0] %>
                 <% @z = 0 %>
                 <% questions = File.readlines(params[:filename1]) %> 
+                <% answers = File.readlines(params[:filename2]) %>
+
+                                <% arrayrad = [0,0,0,0,0,0,0,0,0,0,0,0] %>
+                <% @z = 0 %>
+                <% questions = File.readlines(params[:filename1]) %> 
                 <% answers = File.readlines(params[:filename2]) %> 
                 <% 200.times do %>
-                <% a1 = rand(30)*5 %>
-                <% a2 = rand(30)*5 %>
+                <% a1 = rand(20)*5 %>
+                <% a2 = rand(20)*5 %>
                 <% b = questions[a1] %>
                 <% d = answers[a1] %>
                 <% b1 = questions[a1+1]%>
@@ -62,7 +67,10 @@
                 <% answers[a2 + 11] = d3%>
                 
                 <% end %>
-                <% for i in 0..2 do %>
+
+
+             
+                <% for i in 0..19 do %>
                 <% answers.delete_at(i*5 - i) %>
                 <% end %> 
                 <% File.open("tmp2.txt", "w+") do |f| %> 
@@ -71,20 +79,21 @@
                 <% File.open("tmp.txt", "w+") do |f| %> 
                 <% f.puts(questions) %>
                 <% end %>
-                <% for i in 0..119 do%>
-                <% answers[i] = (answers[i].to_i * 2 - 1)*(i + 1) %>
-              <% end %>    
+
+ 
+                  
         <form action = "/users/<%=current_user.id%>/addpoints"> 
         <input type="hidden" name="aaa" value= <%= params[:id] %> >
           <input type="hidden" name="count" value= <%= params[:count]%> >
         
 
-        <% for i in 0..29 do %>
-    <h3><%=questions[5*i]%></h3> 
+        <% for i in 0..19 do %>
+    <h3><%= i+1 %>) <%=questions[5*i]%></h3> 
     <br>
     <% for j in 0..3 do %>
-       <input type="radio" class="radio" id="radio-<%=(4*i + j + 1)%>" name="radio<%==i%>" checked value = <%=answers[4*i + j]%> />
-        <label for="radio-<%=(4*i + j + 1)%>" id="lbl<%=(4*i + j + 1)%>"><%=questions[5*i + j + 1]%></label>
+    <% @nnn =  4*i + j%>
+      <%= j+1 %>. <input type="radio" class="radio" id="radio-<%=(4*i + j)%>" name="radio<%=i%>" checked value = <%=@nnn%> />
+        <label for="radio-<%=(4*i + j)%>" id="lbl<%=(4*i + j)%>"><%=questions[5*i + j + 1]%></label>
        <br> 
     <% end %>
     <br> 

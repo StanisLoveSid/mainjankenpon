@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
 <div class="leaderboardposition">
  <div class="card" style="width: 20%; padding: 1em;">                            
-<h6><%= link_to "Leaderboard", leaderboard_path %></h6>
+<h6><%= link_to(t("lessons.leaders"), leaderboard_path) %></h6>
 <h6>日本語の忍者:</h6>
 <% @users.sort_by{|user| -user.points.to_i }[0...5].each_with_index do |user, index|%>
 
@@ -22,7 +22,7 @@
 
 
 
-
+<%= link_to "Russian  lessons", "http://localhost:3000/tags/%23ru", class: "btn"%>
 
 <% @lessons.each do |lesson| %>
 
@@ -31,11 +31,11 @@
      <div id="post_content">
      <div class="card">
      <ul id="menu">
-    <li class="author">Submitted <%= time_ago_in_words(lesson.created_at) %> 
-     <% if lesson.user.name? %>
-     by <%=  lesson.user.name%> 
+    <li class="author">  
+     <% if lesson.user.name? %>  
+     <%=  lesson.user.name%> <%= t "lessons.who" %> <%= time_ago_in_words(lesson.created_at) %> <%= t "lessons.when" %>
      <% else %>
-     by Incognito 
+     Incognito <%= t "lessons.who" %> <%= time_ago_in_words(lesson.created_at) %> <%= t "lessons.when" %>
      <% end %>
     </li>﻿
 
@@ -59,13 +59,13 @@
 	 <div style="padding-top: 2%;">
 
        <%= link_to like_lesson_path(lesson), method: :put, remote: true, data: { type: :json }, class: 'btn' do %> 
-     Like
+     <%= t "lessons.like" %>
      <i class="small material-icons">thumb_up</i><%= lesson.get_upvotes.size %>
  <% end %>
         
       
       <%= link_to dislike_lesson_path(lesson), method: :put, remote: true, data: { type: :json }, class: 'btn' do %> 
-     Dislike
+     <%= t "lessons.dislike" %>
      <i class="small material-icons">thumb_down</i><%= lesson.get_downvotes.size %>
  <% end %>
 <div class="socials"></div>
@@ -88,7 +88,7 @@
      <ul id="menu">
 
  <li class="small material-icons", style="padding-left: 4%">insert_chart</li>
-<%= "#{lesson.impressionist_count} views" %>
+<%= "#{lesson.impressionist_count} " %> <%= t "lessons.views" %>
 
 </ul>
   <div calss="saveme">
@@ -107,7 +107,7 @@
 
 <div class="card" style="width: 70%;" >
 <ul id="menu">
-  <li> <h5>Добро пожаловать на сайт JanKenPon </h5> </li>
+  <li> <h5><%= t "lessons.greetings1" %> </h5> </li>
   <li class="togo1"> <%= image_tag("togotogo.png", size: "160x100") %></li>
  </ul>
 </div>
@@ -117,7 +117,7 @@
 <div id="lead_form">  
 <div id="post_content">
 <div class="card">
-<h5>1) Регистрируйтесь:</h5>
+<h5><%= t "lessons.greetings2" %> </h5>
  <ul>
   <li style="padding: 1em; padding-left: 19%;"><%= link_to "Sign up with Facebook", user_omniauth_authorize_path(:facebook), class: "btn waves-effect waves-light" %></li>
   <li style="padding: 1em; padding-left: 18%;"><%= link_to "Sign up with Vkontakte", user_omniauth_authorize_path(:vkontakte), class: "btn waves-effect waves-light" %></li>
@@ -129,7 +129,7 @@
 
 <div id="lead_form1" class="kani" style="width: 44%">  
 <div class="card" style="width: 80%">
-<h5>2) Выбирайте персонажей:</h5>
+<h5><%= t "lessons.greetings2_1" %> </h5>
 <li style="padding-left: 20%;"> <%= image_tag("kani-ki-kun2.jpg", size: "200x550") %> </li>
 </div>
 </div>
@@ -137,10 +137,10 @@
 <div id="lead_form2">  
 <div id="post_content">
 <div class="card">
-<h5>3) Изучайте уроки...</h5>
+<h5><%= t "lessons.greetings3" %> </h5>
 <ul>
 <li style="padding: 1em;"> <span class="btn", style="height: 100px; padding: 2.4em;">Урок №1. Как приручить дракона</span> </li> 
- <h5>...и оценивайте их на форуме:</h5>
+
 
 <li style="padding: 1em;"> <%= link_to "Have any questions? Ask it on our forum", "http://blog.jankenpon.info/en" , class: 'btn btn-default', style: "height: 100px; padding: 2.4em;"%> </li>
 </ul>
@@ -151,7 +151,7 @@
 <div id="lead_form3">  
 <div id="post_content">
 <div class="card">
-<h5>4) Проходите тесты и получайте за них баллы:</h5>
+<h5><%= t "lessons.greetings4" %> </h5>
  Что делал вчера?
                 <br>
                 <br>
@@ -171,7 +171,7 @@
 <div id="lead_form4" class="kani3" style="width: 44%">  
 <div id="post_content">
 <div class="card" style="width: 80%">
-<h5>5) Наберите как можно больше баллов и попадите в таблицу лидеров: </h5>
+<h5><%= t "lessons.greetings5" %>  </h5>
  <div class="card" style="width: 85%; padding: 1em;">                            
 <h6><%= link_to "Leaderboard", leaderboard_path %></h6>
 <h6>日本語の忍者:</h6>
@@ -198,7 +198,7 @@
 <div id="lead_form5" class="kani2">  
 <div id="post_content">
 <div class="card" style="width: 90%;">
-<h5>6) С помощью баллов можно улучшать персонажей: </h5>
+<h5><%= t "lessons.greetings6" %>  </h5>
 <ul id="menu">
 <li style="padding-left: 2%;"> <%= image_tag("kani1.jpg", size: "200x550") %> </li>
 <li style="padding-left: 2%;"><i class="large material-icons">fast_forward</i></li>
@@ -213,7 +213,7 @@
 <div id="lead_form6">  
 <div id="post_content" style="padding-left: 25%;">
 <div class="card">
-<h5>7) Займите звание сегуна. Делитесь Вашими достижениями в социальных сетях. Начать: </h5>
+<h5><%= t "lessons.greetings7" %>  </h5>
  <ul>
   <li style="padding: 1em; padding-left: 19%;"><%= link_to "Sign up with Facebook", user_omniauth_authorize_path(:facebook), class: "btn waves-effect waves-light" %></li>
   <li style="padding: 1em; padding-left: 18%;"><%= link_to "Sign up with Vkontakte", user_omniauth_authorize_path(:vkontakte), class: "btn waves-effect waves-light" %></li>

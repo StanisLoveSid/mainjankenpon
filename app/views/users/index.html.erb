@@ -8,7 +8,7 @@
         
           <%= text_field_tag :search, params[:search], class: "form-control", style: "color: black;" %>
           <p style="margin-left: 11%">
-         <%= submit_tag "Search user", name: nil, class: "btn btn-default" %> 
+         <%= submit_tag(t("users.search_user"), name: nil, class: "btn btn-default") %> 
         </p>
       <% end %>
    </ul>
@@ -53,7 +53,7 @@
         
           <%= text_field_tag :search, params[:search], class: "form-control", style: "color: black;" %>
           <p style="margin-left: 11%">
-         <%= submit_tag "Search user", name: nil, class: "btn btn-default" %> 
+         <%= submit_tag(t("users.search_user"), name: nil, class: "btn btn-default") %> 
         </p>
       <% end %>
    </ul>
@@ -61,10 +61,9 @@
   <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Avatar</th>
-      <th>Points</th>
-      <th>Purchase</th>
+      <th><%= t "users.name" %></th>
+      <th><%= t "users.avatar" %></th>
+      <th><%= t "users.points" %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -76,9 +75,8 @@
         <td><%= image_tag(user.avatar.url(:small), class: "circular") %></td>
         
         <td><%= user.points %></td>
-        <td><%= user.purchase %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Hero', :controller => "users", :action => "hero", :id => user.id %></td>
+        <td><%= link_to(t('users.show'), user )%></td>
+        <td><%= link_to(t('users.character'), :controller => "users", :action => "hero", :id => user.id) %></td>
 
       </tr>
     <% end %> 

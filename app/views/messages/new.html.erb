@@ -1,20 +1,20 @@
 <br \><br \>
 <div id="page_wrapper">
  	<div class ="well">
- 		<p><h4>Send a message to <% if @user.name? %>
- 		                          <%= @user.name %>
+ 		<p><h4> <% if @user.name? %>
+ 		                          <%= @user.name %> <span><%= t "conversations.dialog" %></span>
  		                           <% else %>
- 		                            Inkognito
+ 		                            Inkognito <span><%= t "conversations.dialog" %></span>
  		                            <% end %>
  	  </h4></p>
  	  <div class="thecard", style="width: 40%; height: 400px;">
       <p><%= form_tag({controller: "messages", action: "create"}, method: :post) do %></p>
-      <%= label_tag :subject %>
+      <span><%= t "conversations.theme" %></span>
       <p  style="width: 75%"><%= text_field_tag :subject %></p>
-      <%= label :body, "Message text" %>
+      <span><%= t "conversations.placeholder" %></span>
       <p><%= text_area_tag :body, '', :class => "messagetag"%></p>
        <%= hidden_field_tag(:user, "#{@user.id}") %>
-      <%= submit_tag 'Send message', class: "btn btn-primary" %>
+      <%= submit_tag(t('conversations.send'), class: "btn btn-primary") %>
     <% end %>
     </div>
   </div>

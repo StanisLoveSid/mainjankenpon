@@ -84,7 +84,10 @@ end
   get '/users/:id/saveresult' => 'users#saveresult'
   get '/leaderboard', to: 'leaderboard#index'
   get '/tests', to: 'tests#index'
+  get '/team', to: 'team#index'
+  get '/wrong_page', to: 'wrong_page#index'
   end
   get '/users/:id/addpoints' => 'users#addpoints'
   get '/users/:id/changehero' => 'users#changehero'
+  get "*path" => redirect("/wrong_page")
 end

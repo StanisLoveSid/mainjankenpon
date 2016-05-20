@@ -128,53 +128,43 @@ end
     hash1 = { true => 0, false => 1}
     hash2 = { true => -1, false => 1}
     @data1 = []
-    @data1.push(params[:radio0])
-    @data1.push(params[:radio1])
-    @data1.push(params[:radio2])
-    @data1.push(params[:radio3])
-    @data1.push(params[:radio4])
-    @data1.push(params[:radio5])
-    @data1.push(params[:radio6])
-    @data1.push(params[:radio7])
-    @data1.push(params[:radio8])
-    @data1.push(params[:radio9])
-    @data1.push(params[:radio10])
-    @data1.push(params[:radio11])
-    @data1.push(params[:radiо12])
-    @data1.push(params[:radio13])
-    @data1.push(params[:radio14])
-    @data1.push(params[:radio15])
-    @data1.push(params[:radio16])
-    @data1.push(params[:radio17])
-    @data1.push(params[:radio18])
-    @data1.push(params[:radio19])
-    @data1.push(params[:radio20])
-    @data1.push(params[:radio21])
-    @data1.push(params[:radio23])
-    @data1.push(params[:radio24])
-    @data1.push(params[:radio25])
-    @data1.push(params[:radio26])
-    @data1.push(params[:radio27])
-    @data1.push(params[:radio28])
-    @data1.push(params[:radio29])
+    @data1.push(params[:radio0].to_i)
+    @data1.push(params[:radio1].to_i)
+    @data1.push(params[:radio2].to_i)
+    @data1.push(params[:radio3].to_i)
+    @data1.push(params[:radio4].to_i) 
+    @data1.push(params[:radio5].to_i)
+    @data1.push(params[:radio6].to_i)
+    @data1.push(params[:radio7].to_i)
+    @data1.push(params[:radio8].to_i)
+    @data1.push(params[:radio9].to_i)
+    @data1.push(params[:radio10].to_i)
+    @data1.push(params[:radio11].to_i)
+    @data1.push(params[:radio12].to_i)
+    @data1.push(params[:radio13].to_i)
+    @data1.push(params[:radio14].to_i)
+    @data1.push(params[:radio15].to_i)
+    @data1.push(params[:radio16].to_i)
+    @data1.push(params[:radio17].to_i)
+    @data1.push(params[:radio18].to_i)
+    @data1.push(params[:radio19].to_i)
     @data  = []
     @summa = 0
-    for i in 0..29
-      @data.push(hash1[@data1[i].to_i < 0])
-      @summa += @data[i].to_i
+    @array1 = File.readlines("tmp.txt") 
+    @array2 = File.readlines("tmp2.txt") 
+    for i in 0..19
+      
+      @summa += @array2[@data1[i].to_i].to_i
     end 
-    @data2 = []
-    for i in 0..29
-      @data2.push((hash2[@data1[i]])*(@data1[i].to_i))
-    end
+    
 
     @count = params[:count].to_i
     if current_user.points == nil
         current_user.points = 0 
         current_user.rating = "Beginer"
-     elsif current_user.points == 2 || current_user.points <= 3
+     elsif current_user.points >= 2 && current_user.points <= 3
          current_user.rating = "Pro"
-      elsif current_user.points == 4 || current_user.points <= 6
+      elsif current_user.points >= 4 && current_user.points <= 6
          current_user.rating = "God"
       end
 
@@ -188,7 +178,7 @@ end
     #for i in 0..3
      # @proverka3 += @list.index(@proverka2[i])
     #end    
-    @summa = @data1.to_i + @data2.to_i + @data3.to_i
+   
     #if @proverka3 != @proverka1.to_i
      # @summa = 0
     #end
@@ -199,7 +189,7 @@ end
     current_user.tests = '0'
     current_user.save
     end
-    if (@summa > 1)
+    if (@summa > 17)
       @message2 = "Прошел"
     @data5 = current_user.points
     if (@count + 1 > (current_user.tests).length)
