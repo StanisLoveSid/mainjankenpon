@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :favorite_posts  
   has_many :favorites, through: :favorite_posts, source: :post
   act_as_bookmarker
- 
+  self.per_page = 10
 
 has_reputation :votes, source: {reputation: :votes, of: :posts}, aggregated_by: :sum
 
@@ -52,7 +52,7 @@ end
   has_many :authorizations
  
   
-  has_attached_file :avatar, styles: { medium: "700x500#", small: "10x10#" },  :default_url => ":style/missing.png"
+  has_attached_file :avatar, styles: { medium: "100x100#", small: "10x10#" },  :default_url => ":style/missing.png"
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 

@@ -2,6 +2,9 @@
 <div class="leaderboardposition">
  <div class="card" style="width: 20%; padding: 1em;">                            
 <h6><%= link_to(t("lessons.leaders"), leaderboard_path) %></h6>
+
+
+
 <h6>日本語の忍者:</h6>
 <% @users.sort_by{|user| -user.points.to_i }[0...5].each_with_index do |user, index|%>
 
@@ -19,23 +22,23 @@
 <% end %>
 </div>
 </div>
-
-
-
-<%= link_to "Russian  lessons", "http://localhost:3000/tags/%23ru", class: "btn"%>
+<div id="post_content">
+<%= link_to "Уроки українською", "http://main.jankenpon.info/tags/%23ua", class: "btn"%>
+<%= link_to "Уроки на русском", "http://main.jankenpon.info/tags/%23ru", class: "btn"%>
+</div>
 
 <% @lessons.each do |lesson| %>
 
 
 	
      <div id="post_content">
-     <div class="card">
+     <div class="card", style="width: 60%;">
      <ul id="menu">
-    <li class="author">  
-     <% if lesson.user.name? %>  
-     <%=  lesson.user.name%> <%= t "lessons.who" %> <%= time_ago_in_words(lesson.created_at) %> <%= t "lessons.when" %>
+    <li class="author">
+     <% if lesson.user.name? %>
+     <%=  lesson.user.name%> <%= t "lessons.who" %> <%= time_ago_in_words(lesson.created_at) %> <%= t "lessons.when" %> 
      <% else %>
-     Incognito <%= t "lessons.who" %> <%= time_ago_in_words(lesson.created_at) %> <%= t "lessons.when" %>
+     Incognito <%= t "lessons.who" %> <%= time_ago_in_words(lesson.created_at) %> <%= t "lessons.when" %> 
      <% end %>
     </li>﻿
 
@@ -43,9 +46,9 @@
      <i> <%=  lesson.user.name%></i> 
      <% else %>
      <i> Incognito </i> 
-     <% end %><%= image_tag(lesson.user.avatar.url(:small), class: "circular") %></li>
+     <% end %><%= image_tag(lesson.user.avatar.url(:medium), class: "circular") %></li>
   </ul>
-		<h4 class "title" ><%= link_to lesson.title, lesson, {style: "color: black; position: relative"} %></h4>
+		<h5 class "title" ><%= link_to lesson.title, lesson, {style: "color: black; position: relative"} %></h5>
      <i class="small material-icons">loyalty</i>
  
 		<% lesson.tags.any? %>
@@ -56,39 +59,31 @@
       
 <% end %>
 </div>
-	 <div style="padding-top: 2%;">
 
-       <%= link_to like_lesson_path(lesson), method: :put, remote: true, data: { type: :json }, class: 'btn' do %> 
-     <%= t "lessons.like" %>
-     <i class="small material-icons">thumb_up</i><%= lesson.get_upvotes.size %>
+
+<ul id="menu">
+  
+	 <li id="like_post_<%=lesson.id%>", style="padding-top: 2%;">
+
+       <%= link_to like_lesson_path(lesson), method: :put, remote: true, class: 'btn' do %> 
+     <o> <%= t "lessons.like" %> </o>
+     <i class="small material-icons">thumb_up</i> <o id="liker_<%=lesson.id%>"> <%= lesson.get_upvotes.size %> </o>
  <% end %>
+ </li>
         
-      
-      <%= link_to dislike_lesson_path(lesson), method: :put, remote: true, data: { type: :json }, class: 'btn' do %> 
-     <%= t "lessons.dislike" %>
-     <i class="small material-icons">thumb_down</i><%= lesson.get_downvotes.size %>
+   
+   <li id="dislike_post_<%=lesson.id%>", style="padding-top: 2%;">   
+      <%= link_to dislike_lesson_path(lesson), method: :put, remote: true, class: 'btn' do %> 
+     <o> <%= t "lessons.dislike" %> </o>
+     <i class="small material-icons">thumb_down</i> <o id="disliker_<%=lesson.id%>"> <%= lesson.get_downvotes.size %> </o>
  <% end %>
-<div class="socials"></div>
-<script>
-  $('.socials').socialShareButtons()
-</script>
-
-        <script>
-
-   $('.btn')
-  .on('ajax:send', function () { $(this).addClass('loading'); })
-  .on('ajax:complete', function () { $(this).removeClass('loading'); })
-  
-  .on('ajax:success', function(e, data, status, xhr) { $(this).html(data.count); });
-  
-    </script>
-
-    </div>
+ </li>
+</ul>
 
      <ul id="menu">
 
  <li class="small material-icons", style="padding-left: 4%">insert_chart</li>
-<%= "#{lesson.impressionist_count} " %> <%= t "lessons.views" %>
+<%= "#{lesson.impressionist_count}" %> <%= t "lessons.views" %>
 
 </ul>
   <div calss="saveme">
@@ -97,11 +92,20 @@
  
  </div>
 <% end %>
-
+<div style="padding-left: 24%">
 <%= will_paginate @lessons %>
-
+</div>
 <% else %>
- <div style="padding-bottom: 40%;">
+ <div style="padding-bottom: 30%; ">
+<div id="post_content">
+
+
+<%= link_to  locale: "ja" do %><button class="btn">日本語</button><%end%>
+<%= link_to  locale: "ua" do %><button class="btn">Українська</button><%end%>
+<%= link_to  locale: "en" do %><button class="btn">English</button><%end%>
+<%= link_to  locale: "ru" do %><button class="btn">Русский</button><%end%>
+
+</div>
 
  <div id="lead_form0" style="width: 83%; padding-left: 10%;">  
 
@@ -114,35 +118,59 @@
 
 </div>
 
-<div id="lead_form">  
+
+ <style>
+.buttons { 
+  width: 100%;
+  table-layout: fixed;
+ 
+}
+.buttons .btn { 
+  width: 100%;
+  
+}
+</style>
+
+
+<ul class="menu">
+<li id="lead_form">  
 <div id="post_content">
 <div class="card">
-<h5><%= t "lessons.greetings2" %> </h5>
- <ul>
-  <li style="padding: 1em; padding-left: 19%;"><%= link_to "Sign up with Facebook", user_omniauth_authorize_path(:facebook), class: "btn waves-effect waves-light" %></li>
-  <li style="padding: 1em; padding-left: 18%;"><%= link_to "Sign up with Vkontakte", user_omniauth_authorize_path(:vkontakte), class: "btn waves-effect waves-light" %></li>
-    <li style="padding: 1em; padding-left: 28%;"><%= link_to(t('layouts.registration'), new_user_registration_path, class: "btn") %></li>
-  </ul>
-</div>
-</div>
-</div>
+<h5><%= t "lessons.greetings2" %></h5>
+ <table class="buttons">
+   
+  <td style="padding: 1em; width: 350px;"><%= link_to(t("layouts.facebook"), user_omniauth_authorize_path(:facebook), class: "btn waves-effect waves-light") %></td>
+</table>
+<table class="buttons">
 
-<div id="lead_form1" class="kani" style="width: 44%">  
+  <td style="padding: 1em; width: 350px;"><%= link_to(t("layouts.vk"), user_omniauth_authorize_path(:vkontakte), class: "btn waves-effect waves-light") %></td>
+</table>
+<table class="buttons">
+
+    <td style="padding: 1em; width: 350px;"><%= link_to(t('layouts.registration'), new_user_registration_path, class: "btn") %></td>
+  </table>
+</div>
+</div>
+</li>
+
+<li id="lead_form1" class="kani" style="width: 44%;">  
 <div class="card" style="width: 80%">
-<h5><%= t "lessons.greetings2_1" %> </h5>
-<li style="padding-left: 20%;"> <%= image_tag("kani-ki-kun2.jpg", size: "200x550") %> </li>
+<h5><%= t "lessons.greetings2_1" %></h5>
+<div style="padding-left: 0%;"> <%= image_tag("kanikikun3.jpg", size: "350x600") %> </div>
 </div>
-</div>
+</li>
+
+</ul>
 
 <div id="lead_form2">  
 <div id="post_content">
 <div class="card">
-<h5><%= t "lessons.greetings3" %> </h5>
+<h5><%= t "lessons.greetings3" %></h5>
 <ul>
-<li style="padding: 1em;"> <span class="btn", style="height: 100px; padding: 2.4em;">Урок №1. Как приручить дракона</span> </li> 
+<li style="padding: 1em;"> <span class="btn", style="height: 100px; padding: 1.4em;">Урок 6. は、の и です, структура японского предложения.</span> </li> 
+ <h5><%= t "layouts.forum"  %></h5>
 
-
-<li style="padding: 1em;"> <%= link_to "Have any questions? Ask it on our forum", "http://blog.jankenpon.info/en" , class: 'btn btn-default', style: "height: 100px; padding: 2.4em;"%> </li>
+<li style="padding: 1em;"> <%= link_to(t("lessons.forum"), "http://blog.jankenpon.info/en" , class: 'btn btn-default', style: "height: 100px; padding: 2.4em;")%> </li>
 </ul>
 </div>
 </div>
@@ -151,16 +179,16 @@
 <div id="lead_form3">  
 <div id="post_content">
 <div class="card">
-<h5><%= t "lessons.greetings4" %> </h5>
- Что делал вчера?
+<h5><%= t "lessons.greetings4" %></h5>
+ 日本語 が 大好き です。
                 <br>
                 <br>
     <input type="radio" class="radio" id="radio-1" name="radio" checked value = <%= %>/>
-    <label for="radio-1" id="lbl1">Нужно посмотреть в завтрашний день</label> 
+    <label for="radio-1" id="lbl1">にほんご が だいすき です。</label> 
                 <br>
                 <br>
     <input type="radio" class="radio" id="radio-2" name="radio" value = <%= %>/>
-    <label for="radio-2" id="lbl2">Ничего</label>
+    <label for="radio-2" id="lbl2">Nihongo ga daisuki desu. </label>
                 <br>
                 <br>
 
@@ -171,9 +199,9 @@
 <div id="lead_form4" class="kani3" style="width: 44%">  
 <div id="post_content">
 <div class="card" style="width: 80%">
-<h5><%= t "lessons.greetings5" %>  </h5>
+<h5><%= t "lessons.greetings5" %></h5>
  <div class="card" style="width: 85%; padding: 1em;">                            
-<h6><%= link_to "Leaderboard", leaderboard_path %></h6>
+<h6><%= link_to(t("layouts.leaders"), leaderboard_path) %></h6>
 <h6>日本語の忍者:</h6>
 <% @users.sort_by{|user| -user.points.to_i }[0...5].each_with_index do |user, index|%>
 
@@ -197,14 +225,12 @@
 
 <div id="lead_form5" class="kani2">  
 <div id="post_content">
-<div class="card" style="width: 90%;">
-<h5><%= t "lessons.greetings6" %>  </h5>
+<div class="card" style="width: 100%;">
+<h5><%= t "lessons.greetings6" %> </h5>
 <ul id="menu">
-<li style="padding-left: 2%;"> <%= image_tag("kani1.jpg", size: "200x550") %> </li>
-<li style="padding-left: 2%;"><i class="large material-icons">fast_forward</i></li>
-<li style="padding-left: 10%;"> <%= image_tag("kani2.jpg", size: "200x550") %> </li>
-<li style="padding-left: 2%;"><i class="large material-icons">fast_forward</i></li>
-<li style="padding-left: 10%;"> <%= image_tag("kani3.jpg", size: "200x550") %> </li>
+<li style="padding-left: 0%;"> <%= image_tag("kanikikun1.jpg", size: "350x600") %> </li>
+<li style="padding-left: 0%;"> <%= image_tag("kanikikun2.jpg", size: "350x600") %> </li>
+<li style="padding-left: 0%;"> <%= image_tag("kanikikun3.jpg", size: "350x600") %> </li>
 </ul>
 </div>
 </div>
@@ -213,12 +239,22 @@
 <div id="lead_form6">  
 <div id="post_content" style="padding-left: 25%;">
 <div class="card">
-<h5><%= t "lessons.greetings7" %>  </h5>
- <ul>
-  <li style="padding: 1em; padding-left: 19%;"><%= link_to "Sign up with Facebook", user_omniauth_authorize_path(:facebook), class: "btn waves-effect waves-light" %></li>
-  <li style="padding: 1em; padding-left: 18%;"><%= link_to "Sign up with Vkontakte", user_omniauth_authorize_path(:vkontakte), class: "btn waves-effect waves-light" %></li>
-    <li style="padding: 1em; padding-left: 28%;"><%= link_to(t('layouts.registration'), new_user_registration_path, class: "btn") %></li>
-  </ul>
+<h5><%= t "lessons.greetings7" %> </h5>
+
+   <table class="buttons">
+   
+  <td style="padding: 1em; width: 350px;"><%= link_to(t("layouts.facebook"), user_omniauth_authorize_path(:facebook), class: "btn waves-effect waves-light") %></td>
+</table>
+<table class="buttons">
+
+  <td style="padding: 1em; width: 350px;"><%= link_to(t("layouts.vk"), user_omniauth_authorize_path(:vkontakte), class: "btn waves-effect waves-light") %></td>
+</table>
+<table class="buttons">
+
+    <td style="padding: 1em; width: 350px;"><%= link_to(t('layouts.registration'), new_user_registration_path, class: "btn") %></td>
+  </table>
+
+
 </div>
 </div>
 </div>

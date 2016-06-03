@@ -1,40 +1,47 @@
 <p id="notice"><%= notice %></p>
 <div id="post_content">
-<div class="thecard">
+<div class="thecard" style="height: 560px;">
+<style>
 
+ .leftblock {
+ float: left;
+}
+ .rightblock {
+float:right;
+}
+
+</style>
+  <% if user_signed_in?  %>
+<div class="leftblock">
 <p>
-  <strong><%= t "users.name" %></strong>
+  <strong><%= t "users.name"  %>:</strong>
   <%= @user.name %>
 </p>
 <p>
- <%= image_tag(@user.avatar.url(:small), class: "circular") %>
+ <%= image_tag(@user.avatar.url(:medium), class: "circular") %>
  </p>
 <p>
-  <strong><%= t "users.location" %>:</strong>
+  <strong><%= t "users.location"  %>:</strong>
   <%= link_to(t("users.find"), @user.location) %>
 </p>
 
+<p>User rating <%= @user.rating %> </p>
+
 <p>
-  <strong><%= t "users.points" %>:</strong>
+  <strong><%= t "users.points"  %>:</strong>
   <%= @user.points %>
 </p>
 
-<%= link_to "Main", :controller => "users", :action => "index"%>
-<img src = "222.jpg" alt="Покупка1" id="p1"/>
-<img src = "222.jpg" alt="Покупка2" id="p2"/>
-<img src = "222.jpg" alt="Покупка3" id="p3"/>
-<img src = "222.jpg" alt="Покупка4" id="p4"/>
-<img src = "222.jpg" alt="Покупка5" id="p5"/>
-<img src = "222.jpg" alt="Покупка6" id="p6"/>
-<% array = ["222.jpg"] %>
-<% imgarr = ["0000.jpg","0001.jpg","0010.jpg","0011.jpg","0100.jpg","0101.jpg","0110.jpg","0111.jpg","1000.jpg","1001.jpg","1010.jpg","1011.jpg","1100.jpg","1101.jpg","1110.jpg","1111.jpg"] %>
 
-<% imgarr2 = ["dog.jpg", "cat.jpg", "popugai.jpg"] %>
 
-<%= image_tag imgarr[@user.purchase.to_i] %>
-<%= image_tag imgarr2[@user.herotype.to_i - 1] %>
-<%= @user.name %>
-<%= @user.purchase %>
+<p> <%= t "lessons.press"  %>  </p>
+
+<p class="g-plus" data-action="share"></p>
+
+<p> <a href="https://twitter.com/share" class="twitter-share-button" data-text="Jankenpon. Исследуй японский! Выбирайте персонажей, изучайте наши уроки, проходите тесты, с..." data-hashtags="japanese">Tweet</a> </p>
+ <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<p class="fb-share-button" data-href="http://main.jankenpon.info/users/<%= @user.id.to_s %>/" data-layout="button_count" data-mobile-iframe="true" data-no-turbolink="true" ><p>
 
 <button class="btn" id="copy-some-txt" onclick="document.getElementById('copy-some-txt').innerHTML = 'Copied! Now you can share'">Click to copy the link</button>
 <script>
@@ -43,16 +50,25 @@
 
 });
 </script>
-
-<script>
-function myFunction() {
-    document.getElementById("copy-some-txt").style.color = "red";
-}
-</script>
-
 <p>
 <button class="btn waves-effect waves-light" type="submit" name="action"><%= link_to(t("users.send"), new_message_path(:user => @user.id), {:style=>'color:white;'}) %><i class="material-icons right">send</i></button>
 </p>
+</div>
 
+<div class="rightlock"style="padding-left:50%;">
+
+        <% if @user.herotype == 1 %>
+        <%= image_tag(@user.herotype.to_s+@user.purchase.to_s+".jpg", size: "300x480") %>
+        <% elsif @user.herotype == 2 %>
+        <%= image_tag(@user.herotype.to_s+@user.purchase.to_s+".jpg", size: "480x480") %>
+        <% else %>
+        <% end %>
+ 
+</div>
+<% else %>
+
+ To see this page you need to log in or sign up
+<% end %>
 </div>
 </div>
+

@@ -16,7 +16,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
 
- 
+  GA.tracker = "UA-78440301-1" 
 
 
 

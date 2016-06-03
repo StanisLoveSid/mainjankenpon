@@ -72,7 +72,7 @@
     <% @users.each_with_index do |user, index| %>
       <tr>
         <td><%= user.name %></td>
-        <td><%= image_tag(user.avatar.url(:small), class: "circular") %></td>
+        <td><%= image_tag(user.avatar.url(:medium), class: "circular") %></td>
         
         <td><%= user.points %></td>
         <td><%= link_to(t('users.show'), user )%></td>
@@ -82,6 +82,7 @@
     <% end %> 
   </tbody>
 </table>
+<%= will_paginate @users %>
 </div>
 </div>
  

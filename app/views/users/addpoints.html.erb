@@ -1,16 +1,16 @@
 <div id="post_content">
-<div class="thecard", style="width: 1000px; background-color: white">
-    <h1><%= @message2%></h1>
-    This Ruby on Rails application reads data from radio buttons.
+<div class="thecard", style="width: 90%; background-color: white">
+    <h5><%= @message2%></h5>
+    
     <br>
     <br>
-    Вы ответили на <%= @summa %> вопросов, все!
+    Вы ответили на <%= @summa %> вопросов!
     <br>
     <br>
     <% hash = { 0 => "Неправильно", 1 => "Правильно" } %>
 
     
-    Результаты:
+    <%= t "lessons.results"  %>
 
      
     <div class="collection">
@@ -22,6 +22,13 @@
     </p>
     <% end %> 
     </div>
+
+  <%= link_to "Shop", "/users/"+current_user.id.to_s+"/shop", class: "btn"  %>
+   <%= link_to "Retry", :back, class: "btn"  %>
+    <%= link_to "Leaders", leaderboard_path, class: "btn"  %>
+     <%= link_to "Перейти к тестам", tests_path, class: "btn"  %>
+
+
     </div>
     </div>
 
@@ -34,5 +41,9 @@
 
 
 
+
+
+
+  
 
 

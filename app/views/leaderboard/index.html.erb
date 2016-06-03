@@ -1,15 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Leaderboard</h1>
+<h2 style="padding-left: 8%;"><%= t "lessons.leaders"  %></h2>
 <div id="post_content">
 <div class="thecard">
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Avatar</th>
-      <th>Points</th>
-      <th>Purchase</th>
+      <th><%= t "users.name" %></th>
+      <th><%= t "users.avatar" %></th>
+      <th><%= t "users.points" %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,12 +17,11 @@
     <% @users.each_with_index do |user, index| %>
       <tr>
         <td><%= user.name %></td>
-        <td><%= image_tag(user.avatar.url(:small), class: "circular") %></td>
+        <td><%= image_tag(user.avatar.url(:medium), class: "circular") %></td>
         
         <td><%= user.points %></td>
-        <td><%= user.purchase %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Hero', :controller => "users", :action => "hero", :id => user.id %></td>
+        <td><%= link_to(t('users.show'), user) %></td>
+        <td><%= link_to(t('users.character'), :controller => "users", :action => "hero", :id => user.id) %></td>
 
       </tr>
     <% end %> 

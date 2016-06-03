@@ -36,8 +36,9 @@ gem 'actionpack-page_caching'
 gem 'youtube_addy'
 gem 'ckeditor_rails'
 gem "recaptcha", require: "recaptcha/rails"
-gem 'jquery-turbolinks'
 gem 'zclip-rails'
+gem 'jquery-turbolinks'
+gem 'google-analytics-rails', '1.1.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

@@ -1,22 +1,31 @@
 <div id="post_content">
      <div class="card">
 <div id="points">
-<%= current_user.points %>
+<h5><%=t "users.points"%>:  <%= current_user.points %></h5>
 </div>
   <div style="padding-bottom: 30%;">
+
     <ul id="menu">
 <li id="togo" class="togo"> </li>
 <li id="msg"></li>
 <li id="improve">
-<%= link_to "Улучшить("+@list[current_user.purchase.to_i].to_s+"поинтов)", :controller => "users", :action => "buy", :id => params[:id], :a => @list[current_user.purchase.to_i], :format => "js", remote: true %> 
+
+<%= link_to  :controller => "users", :action => "buy", :id => params[:id], :a => @list[current_user.purchase.to_i], :format => "js", remote: true do %> <button class="btn"> <%="Улучшить("+@list[current_user.purchase.to_i].to_s+"поинтов)"%><i class="tiny material-icons">call_made</i></button><%end%>
+
 </li>
 </ul>
    <div id="current_character">
-   	<%= image_tag(current_user.herotype.to_s+current_user.purchase.to_s+".jpg", size: "260x180") %>
+        <% if current_user.herotype == 1 %>
+   	<%= image_tag(current_user.herotype.to_s+current_user.purchase.to_s+".jpg", size: "300x480") %>
+        <% elsif current_user.herotype == 2 %>
+        <%= image_tag(current_user.herotype.to_s+current_user.purchase.to_s+".jpg", size: "480x480") %>
+        <% else %>
+        <% end %>
    </div>
 
   <div id="character">
   </div>
+
 
 
 </div>

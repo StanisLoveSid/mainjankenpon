@@ -1,6 +1,6 @@
 
 <div id="post_content">
-<div class="thecard", style="width: 1000px; background-color: #99d6ff">
+<div class="thecard", style="width: 93%; background-color: white;">
 
 <h1 class="title">
 	<%= @lesson.title %>
@@ -18,13 +18,14 @@
 <%= "#{@lesson.impressionist_count}" %> <%= t "lessons.views" %>
 </div>
 
-<p class="date">
+ <p class="date">
    <% if @lesson.user.name? %>  
      <%=  @lesson.user.name%> <%= t "lessons.who" %> <%= time_ago_in_words(@lesson.created_at) %> <%= t "lessons.when" %>
      <% else %>
      Incognito <%= t "lessons.who" %> <%= time_ago_in_words(@lesson.created_at) %> <%= t "lessons.when" %>
      <% end %>
 <p>
+
 <button class="btn waves-effect waves-light" type="submit" name="action"><%= link_to(t("lessons.send"), new_message_path(:user => @lesson.user.id), {:style=>'color:white;'}) %><i class="material-icons right">send</i></button>
 </p>
   <% if @lesson.user == current_user %>
@@ -37,13 +38,8 @@
  <p class="body">
  <%= raw @lesson.body %>
  </p>
-   <p>
-   Leksika:
-    <%= @lesson.leksika %>
-  </p>
-  <%= image_tag current_user.herotype.to_s+current_user.purchase.to_s+".jpg" %>
 <% if @lesson.link?  %>
-<iframe width="560" height="349" src="http://www.youtube.com/embed/<%=@lesson.uid %>"></iframe>
+<iframe width="700" height="420" src="http://www.youtube.com/embed/<%=@lesson.uid %>"></iframe>
 <% else %>
 
 <% end %>
@@ -62,28 +58,33 @@
  <% end %>
 
  <p class="btn-group pull-right">
+  <ul id="menu">
+  
+         <li id="like_post_<%=@lesson.id%>", style="padding-top: 2%;">
 
-
-       <%= link_to like_lesson_path(@lesson), method: :put, remote: true, data: { type: :json }, class: 'btn' do %> 
-     <%= t "lessons.like" %>
-     <i class="small material-icons">thumb_up</i><%= @lesson.get_upvotes.size %>
+       <%= link_to like_lesson_path(@lesson), method: :put, remote: true, class: 'btn' do %> 
+     <o> <%= t "lessons.like" %>  </o>
+     <i class="small material-icons">thumb_up</i> <o id="liker_<%=@lesson.id%>"> <%= @lesson.get_upvotes.size %> </o>
  <% end %>
+ </li>
         
-      
-      <%= link_to dislike_lesson_path(@lesson), method: :put, remote: true, data: { type: :json }, class: 'btn' do %> 
-     <%= t "lessons.dislike" %>
-     <i class="small material-icons">thumb_down</i><%= @lesson.get_downvotes.size %>
+   
+   <li id="dislike_post_<%=@lesson.id%>", style="padding-top: 2%;">   
+      <%= link_to dislike_lesson_path(@lesson), method: :put, remote: true, class: 'btn' do %> 
+     <o> <%= t "lessons.dislike" %>  </o>
+     <i class="small material-icons">thumb_down</i> <o id="disliker_<%=@lesson.id%>"> <%= @lesson.get_downvotes.size %> </o>
  <% end %>
+ </li>
+</ul>
 </p>
-
 <% if user_signed_in? %>
- <%= link_to(t("lessons.test"), tests_path, class: 'btn btn-default', style: "height: 100px; padding: 2.4em;") %> 
+   <%= link_to(t("lessons.test"), tests_path, class: 'btn btn-default', style: "height: 100px; padding: 2.4em;") %>  
 
  <% else %>
  <% end %>
- <%= link_to "Have any questions? Ask it on our forum", "http://blog.jankenpon.info/en" , class: 'btn btn-default', style: "height: 100px; padding: 2.4em;"%> 
+ <%= link_to(t("lessons.forum"), "http://blog.jankenpon.info/en" , class: 'btn btn-default', style: "height: 100px; padding: 2.4em;")%> 
 
-</div>
+  </div>
 
  </div>
 

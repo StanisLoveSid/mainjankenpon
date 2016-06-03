@@ -11,15 +11,14 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
+//= require jquery_ujs
+//= require zclip
 //= require materialize-sprockets
 //= require materialize/extras/nouislider
-//= require zclip
-//= require jquery_ujs
 //= require ckeditor-jquery
 //= require turbolinks
 //= require_tree .
-
-
 
 
 $(document).ready(function() {

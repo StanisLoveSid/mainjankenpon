@@ -18,7 +18,7 @@ class LessonsController < ApplicationController
 		   if params[:tag].present? 
               @lessons = Lesson.tagged_with(params[:tag]).paginate(:page => params[:page], :per_page => 6)
            else
-              @lessons = Lesson.all.order("created_at DESC").paginate(:page => params[:page], :per_page => 6)
+              @lessons = Lesson.all.order("created_at ASC").paginate(:page => params[:page], :per_page => 6)
     
            end 
 		
@@ -65,7 +65,7 @@ class LessonsController < ApplicationController
 
 	def update
 		@lesson = Lesson.find(params[:id])
-		if @lesson.update(params[:lesson].permit(:title, :body, :link, :image, :video, :tag_list, :leksika))
+		if @lesson.update(params[:lesson].permit(:title, :body, :link, :image, :video, :tag_list))
 		   redirect_to @lesson
 		else
 			render 'edit'
@@ -86,6 +86,7 @@ class LessonsController < ApplicationController
     	respond_to do |format|
     		format.html {redirect_to :back }
     		format.json { render json: { count: @lesson.get_upvotes.size } }
+                format.js
     	end
     end
 
@@ -95,6 +96,7 @@ class LessonsController < ApplicationController
     	respond_to do |format|
     		format.html {redirect_to :back }
     		format.json { render json: { count: @lesson.get_downvotes.size  } }
+                format.js
     	end
     end
 
@@ -120,7 +122,7 @@ class LessonsController < ApplicationController
 
 	private
 	def lesson_params
-		params.require(:lesson).permit(:title, :body, :id, :link, :image, :video, :tag_list, :leksika)
+		params.require(:lesson).permit(:title, :body, :id, :link, :image, :video, :tag_list)
 	end
 
 	

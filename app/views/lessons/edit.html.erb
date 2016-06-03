@@ -12,9 +12,8 @@
   <p>*Body</p>
   
    <%= f.label :link %> 
-   <%= f.text_field :link, class: 'form-control', required: true %>
-          
-  <%= f.text_area :body, style: "height: 450px; background-color: white", :class => 'ckeditor'%>
+   <%= f.text_field :link %>
+ <%= f.text_area :body, style: "height: 450px; background-color: white", :class => 'ckeditor'%>
   
        
 
@@ -30,10 +29,6 @@
    <p>Tags (separated by commas): </p>
   <p>
   <%= f.text_field :tag_list %>
-  </p>
-
-    <p>
-    <%= f.text_field :leksika %>
   </p>
 
   <p>

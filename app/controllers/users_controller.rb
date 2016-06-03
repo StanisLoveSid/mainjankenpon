@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
 	before_filter :set_locale
-
-  respond_to :js, :html
+        respond_to :js
+ 
    
 
   def index
 
     
-    @users = User.all
+    @users = User.all.order("created_at DESC").paginate(:page => params[:page], :per_page => 30)
   
   end
 
@@ -56,15 +56,17 @@ end
   end
 
   def hero 
+
     if current_user.herotype == 0
        redirect_to '/users/'+current_user.id.to_s+'/changehero', notice: 'You have to choose your character before continue'
     end
+
     @user = User.find(params[:id])
   end
 
   def changehero
 
-    if current_user.herotype == nil
+       if current_user.herotype == nil
       current_user.herotype = 0
       current_user.save
     end
@@ -72,24 +74,27 @@ end
          if current_user.herotype > 0 && current_user.herotype <= 3
             redirect_to root_path
          end
+
   end
 
   def savehero
      @user = current_user
      @user.herotype = params[:number].to_i
      @user.save
-     redirect_to "/"
+     redirect_to "/", notice: 'Character is successfully selected'
   end
 
   def shop
-    @list = [1, 5, 10, 20, 50, 100]
-       if current_user.herotype == 0
+
+    if current_user.herotype == 0
        redirect_to '/users/'+current_user.id.to_s+'/changehero', notice: 'You have to choose your character before continue'
     end
+
+    @list = [160, 320, 480, 700, 1000, 1500]
   end
 
   def buy
-    @list = [1, 5, 10, 20, 50, 100]
+     @list = [160, 320, 480, 700, 1000, 1500]  
      @user = current_user
      if @user.points == nil
          @user.points = 0 
@@ -104,17 +109,17 @@ end
    #    @message = "У Вас уже есть этот предмет"
 
    #   else
-    
+
      if @user.points >= params[:a].to_i 
       @user.points -= params[:a].to_i
       @user.purchase += 1
-      @message = "Level up!"
 
-       
+      @message = "Level up!"
+      respond_with({:user_points => @user.points, :user_purchase => @user.purchase, :message => @message, :list => @list})
+             
       else  
         @message = "Не хватает поинтов для улучшения. Для полученя поинтов изучайте уроки и проходите тесты"
       end
-            respond_with({:user_points => @user.points, :user_purchase => @user.purchase, :message => @message, :list => @list})
       @user.save
      #@a = @user.purchase.to_i
      #@a = @a + params[:b].to_i
@@ -122,7 +127,9 @@ end
     
   end
 
-  def addpoints
+
+
+   def addpoints
     
     @list = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     hash1 = { true => 0, false => 1}
@@ -150,8 +157,13 @@ end
     @data1.push(params[:radio19].to_i)
     @data  = []
     @summa = 0
-    @array1 = File.readlines("tmp.txt") 
-    @array2 = File.readlines("tmp2.txt") 
+
+ 
+    @path1 = Rails.root.to_s+"/usertmp/"+current_user.id.to_s+"tmp.txt"
+    @path2 = Rails.root.to_s+"/usertmp/"+current_user.id.to_s+"tmp2.txt"
+
+    @array1 = File.readlines(@path1) 
+    @array2 = File.readlines(@path2) 
     for i in 0..19
       
       @summa += @array2[@data1[i].to_i].to_i
@@ -162,10 +174,22 @@ end
     if current_user.points == nil
         current_user.points = 0 
         current_user.rating = "Beginer"
-     elsif current_user.points >= 2 && current_user.points <= 3
-         current_user.rating = "Pro"
-      elsif current_user.points >= 4 && current_user.points <= 6
-         current_user.rating = "God"
+     elsif current_user.points >= 2 || current_user.points <= 3
+         current_user.rating = "Young student"
+      elsif current_user.points >= 60 || current_user.points <= 100
+         current_user.rating = "Student"
+           elsif current_user.points >= 120 || current_user.points <= 160
+         current_user.rating = "Wakai Gakusei"
+      elsif current_user.points >= 180 || current_user.points <= 200
+         current_user.rating = "Gakusei"
+           elsif current_user.points >= 210 || current_user.points <= 220
+         current_user.rating = "N5 Starter"
+      elsif current_user.points >= 230 || current_user.points <= 240
+         current_user.rating = "N5 Junior"
+           elsif current_user.points >= 240 || current_user.points <= 270
+         current_user.rating = "N5 Reviser"
+      elsif current_user.points >= 280 || current_user.points <= 310
+         current_user.rating = "N5 dreamer"
       end
 
 
@@ -189,8 +213,8 @@ end
     current_user.tests = '0'
     current_user.save
     end
-    if (@summa > 17)
-      @message2 = "Прошел"
+    if (@summa > 12)
+      @message2 = "Тест успешно пройден!"
     @data5 = current_user.points
     if (@count + 1 > (current_user.tests).length)
     current_user.tests += @simvol
@@ -204,31 +228,35 @@ end
     end
     current_user.save
       else
-        @message2 = "Непрошел"
+        @message2 = "Тест не пройден. Вы ответили меньше чем на 60% вопросов. Просмотрите урок и пройдите тест заново."
   end
   end
 
+  
 
 
 
   def saveresult
     #@user.points += params[:result].to_i
     #@user.save
- end
+  end
 
 
 # Use strong_parameters for attribute whitelisting
 # Be sure to update your create() and update() controller methods.
 
-   def user_params
-      params.require(:user).permit(:avatar, :name, :id, :points, :purchase, :tests, :herotype, :rating)
-   end
 
-   def lesson_params
-		params.require(:post).permit(:title, :body, :id)
-   end
 
 	private
+
+   def user_params
+
+      params.require(:user).permit(:avatar, :name, :id, :points, :purchase, :tests, :herotype, :rating)
+
+   end
+
+
+
 	def locale
 		I18n.locale = params[:locale] if params[:locale].present?
 		# @user.locale

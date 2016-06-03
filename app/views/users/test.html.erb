@@ -1,11 +1,7 @@
 <div id="post_content">
-<div class="thecard", style="width: 1000px; background-color: white">
+<div class="thecard", style="width: 95%; background-color: white">
 
 
-                <% arrayrad = [0,0,0,0,0,0,0,0,0,0,0,0] %>
-                <% @z = 0 %>
-                <% questions = File.readlines(params[:filename1]) %> 
-                <% answers = File.readlines(params[:filename2]) %>
 
                                 <% arrayrad = [0,0,0,0,0,0,0,0,0,0,0,0] %>
                 <% @z = 0 %>
@@ -68,15 +64,16 @@
                 
                 <% end %>
 
-
+             <% @path1 = Rails.root.to_s+"/usertmp/"+current_user.id.to_s+"tmp.txt" %>
+             <%  @path2 = Rails.root.to_s+"/usertmp/"+current_user.id.to_s+"tmp2.txt" %>
              
                 <% for i in 0..19 do %>
                 <% answers.delete_at(i*5 - i) %>
                 <% end %> 
-                <% File.open("tmp2.txt", "w+") do |f| %> 
+                <% File.open(@path2, "w+") do |f| %> 
                 <% f.puts(answers) %>
                 <% end %>
-                <% File.open("tmp.txt", "w+") do |f| %> 
+                <% File.open(@path1, "w+") do |f| %> 
                 <% f.puts(questions) %>
                 <% end %>
 
@@ -88,7 +85,7 @@
         
 
         <% for i in 0..19 do %>
-    <h3><%= i+1 %>) <%=questions[5*i]%></h3> 
+    <h5><%= i+1 %>) <%=questions[5*i]%></h5> 
     <br>
     <% for j in 0..3 do %>
     <% @nnn =  4*i + j%>
@@ -99,9 +96,11 @@
     <br> 
     <% end %>
 
-        <input type="submit" id="submit" name = "AAA" value = "Сохранить результат" class="btn">
+        <input type="submit" id="submit" name = "AAA" value = "<%=t 'lessons.save_result' %>" class="btn">
 
     </form>
 
             </div>
             </div>
+
+

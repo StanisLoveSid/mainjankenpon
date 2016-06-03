@@ -8,22 +8,40 @@
 
 
 html, body {
+            display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 	font-family: 'Raleway', sans-serif;
 	background-image: image-url("sumiesamurai.jpg");
 	background-attachment: fixed;
+        
+-webkit-background-size: cover; 
+-moz-background-size: cover; 
+-o-background-size: cover; 
+background-size: cover; 
 }
 
 
+.wrogcenter {
+    position: absolute;
+    left: 37%;
+    top: 65%;
+    width: 100%;
+    }
 
-.deva {
-	
- 	
-    background-color: #99ddff;
-    box-shadow: 0 0 8px black;
-	position: absolute;
-	top: 70px;
-	
-}
+
+.teamcircular {
+	width: 300px;
+	height: 300px;
+	border-radius: 150px;
+	-webkit-border-radius: 150px;
+	-moz-border-radius: 150px;
+	background: url(http://link-to-your/image.jpg) no-repeat;
+	box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+	-webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+	-moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+	}
+
 
 .cell {
   ul {list-style: none;padding: 0px;margin: 0px;}
@@ -152,27 +170,28 @@ background: #1a1a1a;
     i {
        position: absolute;
     left: 0%;
-    bottom: -23%;
+    bottom: 97%;
     width: 100%;
 
     }
     
 }
 
-.wrogcenter {
-    position: absolute;
-    left: 37%;
-    top: 65%;
-    width: 100%;
-    }
-
-
-
 .kani {
 
 	    position: absolute;
     left: 55%;
-    top: 300px;
+    top: 315px;
+    width: 100%;
+
+}
+
+
+.kanisoc {
+
+           position: absolute; 
+    left: 55%;
+    top: 160px;
     width: 100%;
 
 }
@@ -180,8 +199,8 @@ background: #1a1a1a;
 .kani2 {
       i {
 	    position: absolute;
-  
-    top: 200px;
+     
+    top: 65%;
   
   }
 }
@@ -246,18 +265,6 @@ background: #1a1a1a;
 	-moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 	}
 
-.teamcircular {
-	width: 300px;
-	height: 300px;
-	border-radius: 150px;
-	-webkit-border-radius: 150px;
-	-moz-border-radius: 150px;
-	background: url(http://link-to-your/image.jpg) no-repeat;
-	box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-	-webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-	-moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-	}
-
 
 ul#menu {
     padding: 0;
@@ -269,7 +276,7 @@ ul#menu li {
 
 ul#menu li a {
    
-    padding: 10px 20px;
+    
     text-decoration: none;
     border-radius: 4px 4px 0 0;
 }
@@ -350,7 +357,7 @@ ul#menu li a {
  	width: 600px;
     background-color: white;
     box-shadow: 0 0 8px black;
-   
+
 
  }
 
@@ -474,4 +481,5 @@ ul#menu li a {
   main {
     flex: 1 0 auto;
   }
+
 

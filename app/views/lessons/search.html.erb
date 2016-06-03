@@ -1,15 +1,13 @@
 <% @lessons.each do |lesson| %>
 
-
-  
-     <div id="post_content">
-     <div class="card">
+      <div id="post_content">
+     <div class="card" style="width: 65%;">
      <ul id="menu">
-    <li class="author">Submitted <%= time_ago_in_words(lesson.created_at) %> 
-     <% if lesson.user.name? %>
-     by <%=  lesson.user.name%> 
+    <li class="author">
+       <% if lesson.user.name? %>
+     <%=  lesson.user.name%> <%= t "lessons.who" %> <%= time_ago_in_words(lesson.created_at) %> <%= t "lessons.when" %>
      <% else %>
-     by Incognito 
+     Incognito <%= t "lessons.who" %> <%= time_ago_in_words(lesson.created_at) %> <%= t "lessons.when" %>
      <% end %>
     </li>﻿
 
@@ -17,9 +15,9 @@
      <i> <%=  lesson.user.name%></i> 
      <% else %>
      <i> Incognito </i> 
-     <% end %><%= image_tag(lesson.user.avatar.url(:small), class: "circular") %></li>
+     <% end %><%= image_tag(lesson.user.avatar.url(:medium), class: "circular") %></li>
   </ul>
-    <h4 class "title" ><%= link_to lesson.title, lesson, {style: "color: black; position: relative"} %></h4>
+    <h5 class "title" ><%= link_to lesson.title, lesson, {style: "color: black; position: relative"} %></h5>
      <i class="small material-icons">loyalty</i>
  
     <% lesson.tags.any? %>
@@ -30,32 +28,25 @@
       
 <% end %>
 </div>
-   <div style="padding-top: 2%;">
 
-       <%= link_to like_lesson_path(lesson), method: :put, remote: true, data: { type: :json }, class: 'btn' do %> 
-     Like
-     <i class="small material-icons">thumb_up</i><%= lesson.get_upvotes.size %>
+   <ul id="menu">
+
+         <li id="like_post_<%=lesson.id%>", style="padding-top: 2%;">
+
+       <%= link_to like_lesson_path(lesson), method: :put, remote: true, class: 'btn' do %>
+     <o> <%= t "lessons.like" %> </o>
+     <i class="small material-icons">thumb_up</i> <o id="liker_<%=lesson.id%>"> <%= lesson.get_upvotes.size %> </o>
  <% end %>
-        
-      
-      <%= link_to dislike_lesson_path(lesson), method: :put, remote: true, data: { type: :json }, class: 'btn' do %> 
-     Dislike
-     <i class="small material-icons">thumb_down</i><%= lesson.get_downvotes.size %>
+ </li>
+
+
+   <li id="dislike_post_<%=lesson.id%>", style="padding-top: 2%;">
+      <%= link_to dislike_lesson_path(lesson), method: :put, remote: true, class: 'btn' do %>
+     <o> <%= t "lessons.dislike" %> </o>
+     <i class="small material-icons">thumb_down</i> <o id="disliker_<%=lesson.id%>"> <%= lesson.get_downvotes.size %> </o>
  <% end %>
-
-
-
-        <script>
-
-   $('.btn')
-  .on('ajax:send', function () { $(this).addClass('loading'); })
-  .on('ajax:complete', function () { $(this).removeClass('loading'); })
-  
-  .on('ajax:success', function(e, data, status, xhr) { $(this).html(data.count); });
-  
-    </script>
-
-    </div>
+ </li>
+</ul>
 
      <ul id="menu">
 
@@ -68,5 +59,7 @@
   </div>
  
  </div>
+ 
+
 <% end %>
 

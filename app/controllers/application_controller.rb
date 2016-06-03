@@ -12,12 +12,13 @@ class ApplicationController < ActionController::Base
     type: "application/pdf"
   )
 end
-   
-def after_sign_in_path_for(resource)
-  '/users/'+current_user.id.to_s+'/changehero'
-end
 
 
+ def after_sign_in_path_for(resource)
+
+    '/users/'+current_user.id.to_s+'/changehero'
+
+ end
    
    def require_admin
     redirect_to '/' unless current_user.admin? 

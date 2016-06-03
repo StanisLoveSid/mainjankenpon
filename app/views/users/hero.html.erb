@@ -1,7 +1,8 @@
 <div id="post_content">
 <div class="thecard">
-<%= image_tag current_user.herotype.to_s+current_user.purchase.to_s+".jpg" %>
+<%= image_tag @user.herotype.to_s+@user.purchase.to_s+".jpg" %>
+
+
 <%= link_to "Back to lessons!", lessons_path, class: 'btn btn-default' %>
 </div>
 </div>
-

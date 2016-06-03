@@ -4,8 +4,15 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <meta name="google-site-verification" content="3li0DutDNLzYNQTjR5_Fym6cLjez59T8A15UUSo_TSM" />
+
+ <meta property="og:image" content="http://main.jankenpon.info/assets/learn-aee78848245a1f6cbdf91c67c7b0906f26f706806658c9b925facc1aad17353f.jpg" />
+<meta property="og:title" content="Jankenpon. Изучай японский!" />
+<meta property="og:description" content="Добро пожаловать на сайт jankenpon. Ваш персонаж прогрессирует вместе с Вашим японским языком. Выбирайте персонажей, изучайте наши уроки, проходите тесты, собирайте поинты, улучшайте своего персонажа, занимайте первые места среди наших участников , будьте лучшим на нашем сайте в изучении японского языка и получите звание 日本語の将軍. Делитесь своими достижениями в социальных сетях" />
+
+ <%= analytics_init if GoogleAnalytics.valid_tracker? %>
+
 <meta name='yandex-verification' content='72297eb1250c1dc3' />
-  <title>Bloglab</title>
+  <title>Jankenpon</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= stylesheet_link_tag 'application', 'http://fonts.googleapis.com/css?family=Raleway:400,700' %>
@@ -15,51 +22,89 @@
         window.location.hash = '';
     }
 </script>
-
 <script src="https://www.google.com/jsapi"></script>
   <script src="https://www.youtube.com/iframe_api"></script>
-</head>
-<main>
-<body>
 
-   <script>
-       sweetAlert("Hello world!");
-   </script>    
+<script type="text/javascript" src="//vk.com/js/api/openapi.js?121"></script>
+<script type="text/javascript" src="http://vk.com/js/api/share.js?93" charset="windows-1251"></script>
+<script type="text/javascript">
+  VK.init({apiId: 5275911, onlyWidgets: true});
+</script>
+
+<script src="https://apis.google.com/js/platform.js" async defer>
+  {lang: 'ru'}
+</script>
+
+</head>
+<body>
+<div id="fb-root"></div>
+<script> $(document).ready(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=1052379024850477";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk')); 
+</script>
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-78440301-1', 'auto');
+  ga('send', 'pageview');
+
+</script>  
+
+<main>
+
+       
  <% if user_signed_in? %>
  <div class="navbar-fixed">
  <nav>
     <div class="nav-wrapper">
       <%= link_to('じゃんけんぽん', root_path, class: "brand-logo")  %>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <% if current_user && current_user.admin? %>
+
+      <ul class="right hide-on-med-and-down">
+      
+      <li> 
+              <ul id="drop-nav" class="cell" >
+    <% if current_user && current_user.admin? %>
       <li><%= link_to('New lesson', new_lesson_path) %></li>
       <% end %>
-           <li>
-        <ul id="drop-nav" class="cell" >
- 
-  <li><a href="#">Personal</a>
+  <li> <%= link_to(t("layouts.profile"), visit_path)  %> </li> 
+  <li><a href="#"><%= t "layouts.personal"  %></a>
     <ul>
-        <li><%= link_to(t('layouts.accaunt'), edit_user_registration_path) %></li>
-        <li><%= link_to(t('layouts.messages'), conversations_path) %></li>
-      <li><%= link_to(t('layouts.favorites'), likehistory_path) %></li>
+      <li><%= link_to(t('layouts.accaunt'), edit_user_registration_path) %></li>
+<li><%= link_to(t('layouts.messages'), conversations_path) %></li>
+<li><%= link_to(t('layouts.favorites'), likehistory_path) %></li>
+<li><%= link_to(t('layouts.tests'), tests_path) %></li>    
     </ul>
   </li>
 </ul>
 </li>
-      <li> <%= link_to(t('layouts.shop'), :controller => "users", :action => "shop", :id => current_user.id, :purchase=> current_user.purchase) %> </li>
-      <li><%= link_to(t("layouts.log_out"), destroy_user_session_path, method: :delete) %></li>
-     <li><%= link_to(t('layouts.character'), :controller => "users", :action => "hero", :id => current_user.id) %></li>
-     <li><%= link_to(t('layouts.tests'), tests_path) %></li>
-        <li><%= link_to(t('layouts.users'), users_path) %></li>
-        <li><%= link_to(t('layouts.tags'), tagpages_path) %></li>
-        
-      </ul>
 
+   
+     
+
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+       <ul class="cell">
+     
+ 
+       <li> <%= link_to(t('layouts.shop'), :controller => "users", :action => "shop", :id => current_user.id, :purchase=> current_user.purchase) %> </li>
+<li><%= link_to(t('layouts.character'), :controller => "users", :action => "hero", :id => current_user.id) %></li>
+      <li><%= link_to(t('layouts.users'), users_path) %></li>
+        <li><%= link_to(t('layouts.tags'), tagpages_path) %></li>     
+    
+
+        <li><%= link_to(t("layouts.log_out"), destroy_user_session_path, method: :delete) %></li>
+      </ul>
+     </ul>
     </div>
   </nav>
  </div>
-
-
       <div id="wrapper" class="toggled" >
 
        
@@ -68,12 +113,11 @@
                 <li class="sidebar-brand">
                     
                   
-                    
-                  <ul>
+                                   <ul>
 		 <li class="category", style="color: white;"><%= t "layouts.website"  %></li>
 		 <li><%= link_to(t('layouts.lessons'), root_path)  %></li>
 		 <li><%= link_to(t('layouts.about'), about_path) %></li>
-		 <li><a href="http://blog.jankenpon.info/users/sign_up"><%= t 'layouts.registration' %></a></li>
+		 <li><%= link_to 'Forum', "http://blog.jankenpon.info" %></li>
 
 	 </ul>
 
@@ -82,6 +126,7 @@
 		 <li><%= link_to_unless_current "English", locale: "en" %></li>
 		 <li><%= link_to_unless_current "日本語", locale: "ja" %></li>
 		 <li><%= link_to_unless_current "Українська", locale: "ua" %></li>
+                  <li><%= link_to_unless_current "Русский", locale: "ru" %></li>
 	 </ul>
 
 
@@ -94,7 +139,7 @@
           <%= submit_tag(t("layouts.search_lesson"), name: nil, class: "btn btn-default") %>
         </p>
       <% end %>
-	 </ul>
+	 </ul> 
 
         </div>
 
@@ -121,18 +166,20 @@
         $("#wrapper").toggleClass("toggled");
     });
     </script>
- <%= render 'layouts/flash_messages' %>
+
+
+  <%= render 'layouts/flash_messages' %>
  <% else %>
 <div class="navbar-fixed">
  <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">じゃんけんぽん</a>
+     <%= link_to('じゃんけんぽん', root_path, class: "brand-logo")  %> 
       <ul id="nav-mobile" class="right hide-on-med-and-down">
        
-       <li><%= link_to(t("layouts.log_in"), new_lesson_path, class: "btn waves-effect waves-light") %></li> 
+       <li><%= link_to(t("layouts.log_in"), new_user_session_path, class: "btn waves-effect waves-light") %></li> 
 
-  <li><%= link_to(t("layouts.vk"), user_omniauth_authorize_path(:facebook), class: "btn waves-effect waves-light") %>
-  <li><%= link_to(t("layouts.facebook"), user_omniauth_authorize_path(:vkontakte), class: "btn waves-effect waves-light") %>
+         <li><%= link_to(t("layouts.facebook"), user_omniauth_authorize_path(:facebook), class: "btn waves-effect waves-light") %>
+  <li><%= link_to(t("layouts.vk"), user_omniauth_authorize_path(:vkontakte), class: "btn waves-effect waves-light") %>
 
 </li>
 
@@ -148,12 +195,11 @@
                 <li class="sidebar-brand">
                     
                   
-                    
-                  <ul>
+                                 <ul>
      <li class="category", style="color: white;"><%= t "layouts.website"  %></li>
      <li><%= link_to(t('layouts.lessons'), root_path)  %></li>
      <li><%= link_to(t('layouts.about'), about_path) %></li>
-     <li><a href="http://blog.jankenpon.info/users/sign_up"><%= t 'layouts.registration' %></a></li>
+     <li><%= link_to(t('layouts.registration'), new_user_registration_path) %></li>
 
    </ul>
 
@@ -162,6 +208,7 @@
      <li><%= link_to_unless_current "English", locale: "en" %></li>
      <li><%= link_to_unless_current "日本語", locale: "ja" %></li>
      <li><%= link_to_unless_current "Українська", locale: "ua" %></li>
+     <li><%= link_to_unless_current "Русский", locale: "ru" %></li>
    </ul>
 
 
@@ -176,29 +223,12 @@
       <% end %>
    </ul>
 
-    <ul>
-    <%= form_tag search_users_path, method: :get, class: "navbar-form navbar-right", role: "search" do %>
-        
-          <%= text_field_tag :search, params[:search], class: "form-control", style: "color: white;" %>
-          <p style="margin-left: 11%">
-         <%= submit_tag(t("layouts.search_user"), name: nil, class: "btn btn-default") %> 
-        </p>
-      <% end %>
-   </ul>
+      
+                 
         </div>
      
         
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div style="position: fixed">
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><%= t "layouts.menu" %></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         
 
     </div>
@@ -222,24 +252,24 @@
 	 
 	 </div>
  
- 
+	
  <%= yield %>
 
 
- </main>
-
+ 
+</main>
  <footer class="page-footer">
           <div class="container">
             <div class="row">
               <div class="col l6 s12">
-                <h5 class="white-text">今日は！私たちのサイトじゃんけんぽんの中で君がいる！</h5>
-                <p class="grey-text text-lighten-4">みんなに日本語!</p>
+                <h5 class="white-text">今日は！頑張るタイム！</h5>
+                <p class="grey-text text-lighten-4">みんなの日本語!</p>
               </div>
               <div class="col l4 offset-l2 s12">
-                <h5 class="white-text"><%= t "layouts.contact_links" %></h5>
+                <h5 class="white-text"><%= t "layouts.contact_links"  %></h5>
                 <ul>
-                  <li><a class="grey-text text-lighten-3" href="http://vk.com/id90664978"><%= t "layouts.developers" %></a></li>
-                  <li><a class="grey-text text-lighten-3" href="https://twitter.com/StasSidorenko2">Martyr</a></li>
+                  <li><%=link_to(t("layouts.developers"), team_path)%></a></li>
+                  <li><a class="grey-text text-lighten-3" href="https://vk.com/public122155676">VK community</a></li>
                   
                 </ul>
               </div>
@@ -247,10 +277,10 @@
           </div>
           <div class="site-footer">
             
-           <div style="padding-left: 15%; padding-top: 20px; color: white;">   © 2016 Jankenpon. <%= t "layouts.all_rights_reserved" %> <a style="padding-left: 32%; color: white;">Explore japanese!</a> </div>
+           <div style="padding-left: 15%; padding-top: 20px; color: white;">   © 2016 Jankenpon. <%= t "layouts.all_rights_reserved" %><a style="padding-left: 32%; color: white;">Explore japanese!</a> </div>
             
             </div>
-      
+    
         </footer>
 
 </body>

@@ -12,8 +12,8 @@ Devise.setup do |config|
   # with default "from" parameter.
   
 
-  config.omniauth :facebook, "1723557947863410", "b4d41fb0b436bede3beeda48775cdd4a", scope: 'email', info_fields: 'email,name,first_name,last_name,gender'
-  config.omniauth :vkontakte, "5275911", "1AtArXXFUjsV41ciG8od", scope: 'email', info_fields: 'email,name,first_name,last_name,gender'
+  config.omniauth :facebook, "1052379024850477", "733315f335fde81340b0aa9841004387", scope: 'email', info_fields: 'email,name,first_name,last_name,gender'
+  config.omniauth :vkontakte, "5404141", "kZmLVkk8jTaoIqTCjZBD", scope: 'email', info_fields: 'email,name,first_name,last_name,gender'
 
  
   # Configure the class responsible to send e-mails.

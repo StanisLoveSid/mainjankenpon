@@ -108,12 +108,12 @@
 
 @media(min-width:768px) {
     #wrapper {
-        padding-left: 840px;
+        padding-left: 65%;
         
     }
 
     #wrapper.toggled {
-        padding-left: 1080px;
+        padding-left: 85%;
         
     }
    

@@ -1,23 +1,23 @@
-<br \> <br \>
+ <br \> <br \>
 <div id="post_content">
  <div class="thecard", style="width: 80%">
   <div class="well">
     <div class="title">
-      <h1>Conversations</h1></div>
-        Click on the subject to open the conversation. You can click on the <i class="small material-icons">delete</i> icon to send a conversation to the trash folder. You can begin a new conversation by clicking on the "Send message to the author of post" button on a person's post page.
-      <p><h2> <a href="<%= conversations_path %>"> <%= @conversationscount.count %> Inbox </a> | <a href="<%= trashbin_conversations_path %>"> <%= @trash.count %> Trash </a> </h2></p>
+      <h4><%= t "conversations.messages" %></h4></div>
+        <%= t "conversations.guide" %>
+      <p><h2> <a href="<%= conversations_path %>"> <%= @conversationscount.count %> <%= t "conversations.mail" %> </a> | <a href="<%= trashbin_conversations_path %>"> <%= @trash.count %> <%= t "conversations.bucket" %> </a> </h2></p>
     <br>
-    <h3> Inbox </h3>
+    <h3> <%= t "conversations.mail" %> </h3>
     <br \>
   <table width="900" border="0" cellspacing="0" cellpadding="0" style="background-color:#9FC; border-radius:10px;" align="center">
   <tr>
-    <th scope="col" class="emailTH">SENDER</th>
-    <th scope="col" class="emailTH">SUBJECT</th>
-    <th scope="col" class="emailTH">DATE</th>
+    <th scope="col" class="emailTH"><%= t "conversations.sender" %></th>
+    <th scope="col" class="emailTH"><%= t "conversations.theme" %></th>
+    <th scope="col" class="emailTH"><%= t "conversations.date" %></th>
     <th scope="col" class="emailTH"></th>
   </tr>
   <% if @conversations == nil || @conversations.empty? %>
-    <i>Your Inbox folder is currently empty</i>
+    <i><%= t "conversations.empty" %></i>
     <%end%>
   <% @conversations.each do |conversation| %>
   <tr>

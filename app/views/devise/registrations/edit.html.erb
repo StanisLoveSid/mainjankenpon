@@ -5,14 +5,15 @@
   <%= devise_error_messages! %>
 
  <div class="form-group">
- <h4>Your points:  <%= current_user.points %></h4>
+ <h4><%= t "users.points"  %>:  <%= current_user.points %></h4>
 
- <% if current_user.rating? %>
+   <% if current_user.rating? %>
     <h4>Your rating <%= current_user.rating %> </h4>
     <% else %>
     
     <% end %>
- <p> <%= image_tag(current_user.avatar.url(:small), class: "circular") %></p>
+
+ <p> <%= image_tag(current_user.avatar.url(:medium), class: "circular") %></p>
         <%= f.label :avatar, class: 'col-sm-2 control-label'  %> 
         <div class="col-sm-6">
             <%= f.file_field :avatar, class: "btn" %>
@@ -20,33 +21,33 @@
     </div>
 
 
-  <div><%= f.label :name %><br />
+  <div><%= t "users.name"  %><br />
   <%= f.text_field :name, autofocus: true, style: "width: 40%" %></div>
 
- <div><%= f.label :location %><br />
+ <div><%= t "users.location" %><br />
   <%= f.text_field :location, autofocus: true, style: "width: 40%;" %></div>
 
-  <div><%= f.label :email %><br />
+  <div><%= t "devise.email" %><br />
   <%= f.email_field :email, autofocus: true, style: "width: 40%" %></div>
   <br>
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+  <div><%= t "devise.password" %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "off", style: "width: 40%" %></div>
 
-  <div><%= f.label :password_confirmation %><br />
+  <div><%= t "devise.password_confirmation"  %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off", style: "width: 40%" %></div>
 <% if f.object.encrypted_password.present? %>
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+  <div><%= t "devise.current_password" %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "off", style: "width: 40%" %></div>
 <% end %>
   <div><%= f.submit "Update", class: "btn" %></div>
   
 <% end %>
 
-<p>You can destroy your accaunt <%= button_to "Destroy my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p> <%= t "devise.unpleased"  %> <%= button_to(t("devise.delete"), registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete) %></p>
 
-<%= link_to "Back", :back %>
+<%= link_to(t("devise.back"), :back) %>
 </div>
