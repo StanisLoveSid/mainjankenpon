@@ -31,7 +31,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+   if @user = User.find_by_id(params[:id])
+    @user
+  else
+      redirect_to wrong_page_path
+    end
   end
 
 
@@ -79,9 +83,13 @@ end
 
   def savehero
      @user = current_user
-     @user.herotype = params[:number].to_i
+     if @user.herotype > 0
+      redirect_to "/", notice: 'Character is already selected'
+    else
+    @user.herotype = params[:number].to_i
      @user.save
-     redirect_to "/", notice: 'Character is successfully selected'
+      redirect_to "/", notice: 'Character is successfully selected'
+    end
   end
 
   def shop
