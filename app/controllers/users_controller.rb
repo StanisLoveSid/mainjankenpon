@@ -179,26 +179,29 @@ end
     
 
     @count = params[:count].to_i
-    if current_user.points == nil
-        current_user.points = 0 
-        current_user.rating = "Beginer"
-     elsif current_user.points >= 2 || current_user.points <= 3
+
+  case current_user.save
+
+    when current_user.points == nil
+         current_user.points = 0 
+         current_user.rating = "Beginer"
+    when current_user.points >= 2 && current_user.points <= 3
          current_user.rating = "Young student"
-      elsif current_user.points >= 60 || current_user.points <= 100
+    when current_user.points >= 60 && current_user.points <= 100
          current_user.rating = "Student"
-           elsif current_user.points >= 120 || current_user.points <= 160
+    when current_user.points >= 120 && current_user.points <= 160
          current_user.rating = "Wakai Gakusei"
-      elsif current_user.points >= 180 || current_user.points <= 200
+    when current_user.points >= 180 && current_user.points <= 200
          current_user.rating = "Gakusei"
-           elsif current_user.points >= 210 || current_user.points <= 220
+    when current_user.points >= 210 && current_user.points <= 220
          current_user.rating = "N5 Starter"
-      elsif current_user.points >= 230 || current_user.points <= 240
+    when current_user.points >= 230 && current_user.points <= 240
          current_user.rating = "N5 Junior"
-           elsif current_user.points >= 240 || current_user.points <= 270
+    when current_user.points >= 240 && current_user.points <= 270
          current_user.rating = "N5 Reviser"
-      elsif current_user.points >= 280 || current_user.points <= 310
+    when current_user.points >= 280 && current_user.points <= 310
          current_user.rating = "N5 dreamer"
-      end
+  end
 
 
 
